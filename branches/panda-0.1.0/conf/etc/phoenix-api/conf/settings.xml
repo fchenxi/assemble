@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+<!--
+ | This is the configuration file for Maven. It can be specified at two levels:
+ |
+ |  1. User Level. This settings.xml file provides configuration for a single user, 
+ |                 and is normally provided in ${user.home}/.m2/settings.xml.
+ |
+ |                 NOTE: This location can be overridden with the CLI option:
+ |
+ |                 -s /path/to/user/settings.xml
+ |
+ |  2. Global Level. This settings.xml file provides configuration for all Maven
+ |                 users on a machine (assuming they're all using the same Maven
+ |                 installation). It's normally provided in 
+ |                 ${maven.home}/conf/settings.xml.
+ |
+ |                 NOTE: This location can be overridden with the CLI option:
+ |
+ |                 -gs /path/to/global/settings.xml
+ |
+ | The sections in this sample file are intended to give you a running start at
+ | getting the most out of your Maven installation. Where appropriate, the default
+ | values (values used when the setting is not specified) are provided.
+ |
+ |-->
+<settings>
+    <localRepository>D:\repository</localRepository>
+    <servers>
+        <server>
+            <id>releases</id>
+            <username>deployment</username>
+            <password><![CDATA[deployment123]]></password>
+        </server>
+        <server>
+            <id>snapshots</id>
+            <username>deployment</username>
+            <password><![CDATA[deployment123]]></password>
+        </server>
+        <server>
+            <id>thirdparty</id>
+            <username>deployment</username>
+            <password><![CDATA[deployment123]]></password>
+        </server>
+        <server>
+            <id>tomcat</id>
+            <username>admin</username>
+            <password>1q2w3e</password>
+        </server>
+    </servers>
+    <mirrors>
+        <mirror>
+            <id>mvnrepository</id>
+            <mirrorOf>*</mirrorOf>
+            <name>Center Repository Switchboard</name>
+            <url>http://central.maven.org/maven2</url>
+        </mirror>
+        <mirror>
+            <id>cloudera</id>
+            <mirrorOf>cloudera</mirrorOf>
+            <name>Cloudera Repository Switchboard</name>
+            <url>https://repository.cloudera.com/artifactory/cloudera-repos/</url>
+        </mirror>
+        <mirror>
+            <id>central</id>
+            <mirrorOf>*</mirrorOf>
+            <name>Maven Repository Switchboard</name>
+            <url>http://repo1.maven.org/maven2</url>
+        </mirror>
+
+        <mirror>
+            <id>ui</id>
+            <mirrorOf>*</mirrorOf>
+            <name>Human Readable Name for this Mirror.</name>
+            <url>http://uk.maven.org/maven2/</url>
+        </mirror>
+        <mirror>
+            <id>ibiblio</id>
+            <mirrorOf>*</mirrorOf>
+            <name>Human Readable Name for this Mirror.</name>
+            <url>http://mirrors.ibiblio.org/pub/mirrors/maven2/</url>
+        </mirror>
+        <mirror>
+            <id>jboss-public-repository-group</id>
+            <mirrorOf>*</mirrorOf>
+            <name>JBoss Public Repository Group</name>
+            <url>http://repository.jboss.org/nexus/content/groups/public</url>
+        </mirror>
+        <mirror>
+            <id>yougou</id>
+            <mirrorOf>*</mirrorOf>
+            <url>http://172.17.210.101:8081/nexus/content/groups/public/
+            </url>
+        </mirror>
+        <mirror>
+            <id>yougou</id>
+            <mirrorOf>*</mirrorOf>
+            <url>http://172.17.210.101:8081/nexus/content/repositories/thirdparty/</url>
+        </mirror>
+        <mirror>
+            <id>yougou</id>
+            <mirrorOf>*</mirrorOf>
+            <url>http://172.17.210.101:8081/nexus/content/repositories/snapshots/</url>
+        </mirror>
+        <mirror>
+            <id>yougou</id>
+            <mirrorOf>*</mirrorOf>
+            <url>http://172.17.210.101:8081/nexus/content/repositories/releases/</url>
+        </mirror>
+        <mirror>
+            <id>yougou</id>
+            <mirrorOf>*</mirrorOf>
+            <url>http://119.147.213.188:8081/nexus/content/groups/public</url>
+        </mirror>
+    </mirrors>
+    <profiles>
+        <profile>
+            <id>yougou</id>
+            <repositories>
+                <repository>
+                    <id>central</id>
+                    <url>http://central</url>
+                    <releases>
+                        <enabled>true</enabled>
+                    </releases>
+
+                    <snapshots>
+                        <enabled>true</enabled>
+                    </snapshots>
+                </repository>
+            </repositories>
+            <pluginRepositories>
+                <pluginRepository>
+                    <id>central</id>
+                    <url>http://central</url>
+                    <releases>
+                        <enabled>true</enabled>
+                    </releases>
+                    <snapshots>
+                        <enabled>true</enabled>
+                    </snapshots>
+                </pluginRepository>
+            </pluginRepositories>
+        </profile>
+        <profile>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+    </profiles>
+    <activeProfiles>
+        <activeProfile>yougou</activeProfile>
+    </activeProfiles>
+</settings> 
+
