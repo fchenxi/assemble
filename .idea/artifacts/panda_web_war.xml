@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="war" name="panda-web:war">
-    <output-path>$PROJECT_DIR$/panda-web/target</output-path>
-    <root id="archive" name="dc-scheduler-web.war">
-      <element id="artifact" artifact-name="panda-web:war exploded" />
-    </root>
-  </artifact>
-</component>
