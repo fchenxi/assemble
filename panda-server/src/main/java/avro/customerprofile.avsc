@@ -1,0 +1,26 @@
+{
+ "namespace": "example.avro",
+ "type": "record",
+ "name": "CustomerProfile",
+ "fields": [
+     {"name": "name", "type": "string"},
+     {"name": "next_best_action", "type": ["string", "null"]},
+     {"name": "loyalty_card_number", "type": ["string", "null"]},
+     {"name": "customer_type", "type": ["string", "null"]},
+     {"name": "estimated_lifetime_value", "type": ["int", "null"]},
+     {"name": "purchase_history", "type" : {
+        "type" : "array",
+        "items" : {
+                "type": "record",
+                "name" : "ProductPurchase",
+                "fields" : [
+                    {"name" : "item" , "type" : "string"},
+                    {"name" : "code", "type" : "string"},
+                    {"name" : "quantity" , "type" : "int"},
+                    {"name" : "event_date", "type" : "string"}
+                ]
+            }
+        }
+     }
+    ]
+}
