@@ -9,7 +9,7 @@
     <artifactId>panda-web</artifactId>
     <version>${project.parent.version}</version>
     <packaging>war</packaging>
-    <name>panda-web Maven Webapp</name>
+    <name>panda-web</name>
     <url>http://maven.apache.org</url>
     <properties>
         <maven.build.timestamp.format>yyyyMMddHHmm</maven.build.timestamp.format>
@@ -17,7 +17,17 @@
     </properties>
     <dependencies>
         <dependency>
-            <groupId>panda</groupId>
+            <groupId>cn.panda</groupId>
+            <artifactId>panda-common</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.panda</groupId>
+            <artifactId>panda-hbase</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.panda</groupId>
             <artifactId>panda-server</artifactId>
             <version>${project.version}</version>
         </dependency>

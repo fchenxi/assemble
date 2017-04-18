@@ -1,8 +1,8 @@
 package cn.panda.excel.test;
 
-import cn.panda.excel.ExcelUtil;
-import cn.panda.utils.DateUtils;
-import cn.panda.model.AbstractJob;
+import cn.panda.common.excel.ExcelUtil;
+import cn.panda.common.utils.DateUtilsV1;
+import cn.panda.common.model.AbstractJob;
 import org.junit.Test;
 
 import java.io.File;
@@ -30,7 +30,7 @@ public class PoiTest {
         jobHandleRequires.add(new AbstractJob("dc_retail_pos", "order_main", "02:00", "1", ""));
         Map<String, String> datas = new HashMap<String, String>();
         datas.put("title", "DC调度系统任务报表");
-        datas.put("date", DateUtils.getCurDate());
+        datas.put("date", DateUtilsV1.getCurDate());
         datas.put("dep", "www.wonhigh.cn");
         ExcelUtil.getInstance().exportExcelByTemplate(datas, "/monJobTemplate.xls",
                 "E:/dcTemplateExcel.xls", jobHandleRequires,
