@@ -16,8 +16,6 @@
 
 package cn.panda.common.server.bo.stat;
 
-import com.navercorp.pinpoint.common.server.bo.JvmGcType;
-
 /**
  * @author HyunGil Jeong
  */

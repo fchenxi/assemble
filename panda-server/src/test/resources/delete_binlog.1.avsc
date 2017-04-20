@@ -1,0 +1,52 @@
+{
+  "name" : "delete_binlog",
+  "type" : "record",
+  "doc" : "Auto-generated Avro schema for delete_binlog. Generated at  10, 2017 10:26:59  CST",
+  "namespace" : "wdw",
+  "meta" : "pk=seq_no",
+  "fields" : [ {
+    "name" : "seq_no",
+    "type" : [ "long", "null" ],
+    "meta" : "dbFieldName=seq_no;dbFieldPosition=1;dbFieldType=bigint"
+  }, {
+    "name" : "capture_event_uuid",
+    "type" : [ "string", "null" ],
+    "meta" : "dbFieldName=capture_event_uuid;dbFieldPosition=2;dbFieldType=char"
+  }, {
+    "name" : "dml_type",
+    "type" : [ "int", "null" ],
+    "meta" : "dbFieldName=dml_type;dbFieldPosition=3;dbFieldType=tinyint"
+  }, {
+    "name" : "db_name",
+    "type" : [ "string", "null" ],
+    "meta" : "dbFieldName=db_name;dbFieldPosition=4;dbFieldType=varchar"
+  }, {
+    "name" : "db_source_name",
+    "type" : [ "string", "null" ],
+    "meta" : "dbFieldName=db_source_name;dbFieldPosition=5;dbFieldType=varchar"
+  }, {
+    "name" : "table_name",
+    "type" : [ "string", "null" ],
+    "meta" : "dbFieldName=table_name;dbFieldPosition=6;dbFieldType=varchar"
+  }, {
+    "name" : "id_column_name",
+    "type" : [ "string", "null" ],
+    "meta" : "dbFieldName=id_column_name;dbFieldPosition=7;dbFieldType=varchar"
+  }, {
+    "name" : "id_column_value",
+    "type" : [ "string", "null" ],
+    "meta" : "dbFieldName=id_column_value;dbFieldPosition=8;dbFieldType=varchar"
+  }, {
+    "name" : "update_timestamp_column_value",
+    "type" : [ "long", "null" ],
+    "meta" : "dbFieldName=update_timestamp_column_value;dbFieldPosition=10;dbFieldType=datetime"
+  }, {
+    "name" : "capture_time",
+    "type" : [ "long", "null" ],
+    "meta" : "dbFieldName=capture_time;dbFieldPosition=11;dbFieldType=datetime"
+  }, {
+    "name" : "dml_event_time",
+    "type" : [ "long", "null" ],
+    "meta" : "dbFieldName=dml_event_time;dbFieldPosition=12;dbFieldType=datetime"
+  } ]
+}

@@ -25,8 +25,9 @@ import org.apache.hadoop.hbase.util.Bytes;
  */
 public final class HBaseTables {
 
-//    public static final int APPLICATION_NAME_MAX_LEN = PinpointConstants.APPLICATION_NAME_MAX_LEN;
-//    public static final int AGENT_NAME_MAX_LEN = PinpointConstants.AGENT_NAME_MAX_LEN;
+    public static final int APPLICATION_NAME_MAX_LEN = 24;
+
+    public static final int AGENT_NAME_MAX_LEN = 24;
 
     // Time delta (in milliseconds) we can store in each row of AgentStatV2
     public static final int AGENT_STAT_TIMESPAN_MS = 5 * 60 * 1000;

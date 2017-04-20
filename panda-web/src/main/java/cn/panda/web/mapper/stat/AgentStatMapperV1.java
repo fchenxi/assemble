@@ -48,7 +48,7 @@ import org.springframework.stereotype.Component;
 public abstract class AgentStatMapperV1<T extends AgentStatDataPoint> implements AgentStatMapper<T> {
 
     @Autowired
-    @Qualifier("")
+    @Qualifier("agentStatRowKeyDistributor")
     private RowKeyDistributorByHashPrefix rowKeyDistributorByHashPrefix;
 
     @Override

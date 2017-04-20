@@ -16,15 +16,19 @@
 
 package cn.panda.common.hbase;
 
+import cn.panda.common.utils.ExecutorFactory;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hbase.TableName;
 import org.apache.hadoop.hbase.client.Connection;
 import org.apache.hadoop.hbase.client.ConnectionFactory;
 import org.apache.hadoop.hbase.client.Table;
+import org.apache.hadoop.security.UserGroupInformation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.DisposableBean;
+import org.springframework.beans.factory.annotation.Value;
 
+import javax.annotation.Resource;
 import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -39,6 +43,12 @@ import java.util.concurrent.TimeUnit;
 public class PooledHTableFactory implements TableFactory, DisposableBean {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
+    @Value("${kerberos.hbase.principal}")
+    private String PRINCIPAL;
+
+    @Value("${kerberos.hbase.keytab.path}")
+    private String KEYTAB_PATH;
 
     public static final int DEFAULT_POOL_SIZE = 256;
     public static final int DEFAULT_WORKER_QUEUE_SIZE = 1024*5;
@@ -55,6 +65,14 @@ public class PooledHTableFactory implements TableFactory, DisposableBean {
     public PooledHTableFactory(Configuration config, int poolSize, int workerQueueSize, boolean prestartThreadPool) {
         this.executor = createExecutorService(poolSize, workerQueueSize, prestartThreadPool);
         try {
+            // Add kerberos
+//            config.addResource("hbase-site.xml");
+            if ("kerberos".equalsIgnoreCase(config.get("hbase.security.authentication"))) {
+                config.set("hbase.security.authentication", "kerberos");
+                config.set("hadoop.security.authentication", "kerberos");
+                UserGroupInformation.setConfiguration(config);
+                UserGroupInformation.loginUserFromKeytab(PRINCIPAL, KEYTAB_PATH);
+            }
             this.connection = ConnectionFactory.createConnection(config, executor);
         } catch (IOException e) {
             throw new HbaseSystemException(e);

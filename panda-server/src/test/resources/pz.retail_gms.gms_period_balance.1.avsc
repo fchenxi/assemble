@@ -1,0 +1,209 @@
+{
+  "name" : "gms_period_balance",
+  "type" : "record",
+  "doc" : "Auto-generated Avro schema for gms_period_balance. Generated at 2017-04-10 10:39:030",
+  "namespace" : "retail_gms",
+  "meta" : "pk=id,store_no,sku_no,year,month,order_unit_no,company_no,order_unit_no,brand_no,store_no,year,month,item_no,sharding_flag,company_no,year,month,brand_no",
+  "fields" : [ {
+    "name" : "id",
+    "type" : [ "string", "null" ]
+  }, {
+    "name" : "company_no",
+    "type" : [ "string", "null" ]
+  }, {
+    "name" : "order_unit_no",
+    "type" : [ "string", "null" ]
+  }, {
+    "name" : "order_unit_name",
+    "type" : [ "string", "null" ]
+  }, {
+    "name" : "store_no",
+    "type" : [ "string", "null" ]
+  }, {
+    "name" : "store_name",
+    "type" : [ "string", "null" ]
+  }, {
+    "name" : "brand_no",
+    "type" : [ "string", "null" ]
+  }, {
+    "name" : "brand_name",
+    "type" : [ "string", "null" ]
+  }, {
+    "name" : "item_no",
+    "type" : [ "string", "null" ]
+  }, {
+    "name" : "item_code",
+    "type" : [ "string", "null" ]
+  }, {
+    "name" : "item_name",
+    "type" : [ "string", "null" ]
+  }, {
+    "name" : "size_no",
+    "type" : [ "string", "null" ]
+  }, {
+    "name" : "sku_no",
+    "type" : [ "string", "null" ]
+  }, {
+    "name" : "year",
+    "type" : [ "string", "null" ]
+  }, {
+    "name" : "month",
+    "type" : [ "string", "null" ]
+  }, {
+    "name" : "quality_opening_qty",
+    "type" : [ "int", "null" ]
+  }, {
+    "name" : "quality_opening_total",
+    "type" : [ "int", "null" ]
+  }, {
+    "name" : "bad_opening_qty",
+    "type" : [ "int", "null" ]
+  }, {
+    "name" : "bad_opening_total",
+    "type" : [ "int", "null" ]
+  }, {
+    "name" : "purchase_in_qty",
+    "type" : [ "int", "null" ]
+  }, {
+    "name" : "purchase_return_qty",
+    "type" : [ "int", "null" ]
+  }, {
+    "name" : "purchase_way_qty",
+    "type" : [ "int", "null" ]
+  }, {
+    "name" : "purchase_diff_qty",
+    "type" : [ "int", "null" ]
+  }, {
+    "name" : "outer_transfer_out_qty",
+    "type" : [ "int", "null" ]
+  }, {
+    "name" : "inner_transfer_out_qty",
+    "type" : [ "int", "null" ]
+  }, {
+    "name" : "bad_in_tran_out_qty",
+    "type" : [ "int", "null" ]
+  }, {
+    "name" : "outer_transfer_in_qty",
+    "type" : [ "int", "null" ]
+  }, {
+    "name" : "outer_way_qty",
+    "type" : [ "int", "null" ]
+  }, {
+    "name" : "outer_diff_qty",
+    "type" : [ "int", "null" ]
+  }, {
+    "name" : "inner_transfer_in_qty",
+    "type" : [ "int", "null" ]
+  }, {
+    "name" : "inner_way_qty",
+    "type" : [ "int", "null" ]
+  }, {
+    "name" : "inner_diff_qty",
+    "type" : [ "int", "null" ]
+  }, {
+    "name" : "bad_in_tran_in_qty",
+    "type" : [ "int", "null" ]
+  }, {
+    "name" : "bad_inner_way_qty",
+    "type" : [ "int", "null" ]
+  }, {
+    "name" : "bad_inner_diff_qty",
+    "type" : [ "int", "null" ]
+  }, {
+    "name" : "sales_out_qty",
+    "type" : [ "int", "null" ]
+  }, {
+    "name" : "bad_sales_out_qty",
+    "type" : [ "int", "null" ]
+  }, {
+    "name" : "quality_surplus_qty",
+    "type" : [ "int", "null" ]
+  }, {
+    "name" : "bad_surplus_qty",
+    "type" : [ "int", "null" ]
+  }, {
+    "name" : "quality_loss_qty",
+    "type" : [ "int", "null" ]
+  }, {
+    "name" : "bad_loss_qty",
+    "type" : [ "int", "null" ]
+  }, {
+    "name" : "others_in_qty",
+    "type" : [ "int", "null" ]
+  }, {
+    "name" : "others_out_qty",
+    "type" : [ "int", "null" ]
+  }, {
+    "name" : "bad_others_in_qty",
+    "type" : [ "int", "null" ]
+  }, {
+    "name" : "bad_others_out_qty",
+    "type" : [ "int", "null" ]
+  }, {
+    "name" : "quality_during_qty",
+    "type" : [ "int", "null" ]
+  }, {
+    "name" : "bad_during_qty",
+    "type" : [ "int", "null" ]
+  }, {
+    "name" : "quality_closing_qty",
+    "type" : [ "int", "null" ]
+  }, {
+    "name" : "bad_closing_qty",
+    "type" : [ "int", "null" ]
+  }, {
+    "name" : "lock_qty",
+    "type" : [ "int", "null" ]
+  }, {
+    "name" : "backup_qty",
+    "type" : [ "int", "null" ]
+  }, {
+    "name" : "store_into_qty",
+    "type" : [ "int", "null" ]
+  }, {
+    "name" : "shop_into_qty",
+    "type" : [ "int", "null" ]
+  }, {
+    "name" : "into_store_qty",
+    "type" : [ "int", "null" ]
+  }, {
+    "name" : "into_shop_qty",
+    "type" : [ "int", "null" ]
+  }, {
+    "name" : "batch_sale_qty",
+    "type" : [ "int", "null" ]
+  }, {
+    "name" : "pos_back_qty",
+    "type" : [ "int", "null" ]
+  }, {
+    "name" : "pos_bad_back_qty",
+    "type" : [ "int", "null" ]
+  }, {
+    "name" : "pos_sale_qty",
+    "type" : [ "int", "null" ]
+  }, {
+    "name" : "bad_from_shop_qty",
+    "type" : [ "int", "null" ]
+  }, {
+    "name" : "bad_into_store_qty",
+    "type" : [ "int", "null" ]
+  }, {
+    "name" : "lose_qty",
+    "type" : [ "int", "null" ]
+  }, {
+    "name" : "back_factory_qty",
+    "type" : [ "int", "null" ]
+  }, {
+    "name" : "guest_bad_sale_qty",
+    "type" : [ "int", "null" ]
+  }, {
+    "name" : "create_time",
+    "type" : [ "long", "null" ]
+  }, {
+    "name" : "update_time",
+    "type" : [ "long", "null" ]
+  }, {
+    "name" : "sharding_flag",
+    "type" : [ "string", "null" ]
+  } ]
+}

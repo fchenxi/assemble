@@ -16,13 +16,17 @@
 
 package cn.panda.web.dao.hbase.stat.v1;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
+import cn.panda.common.hbase.HBaseTables;
+import cn.panda.common.hbase.HbaseOperations2;
+import cn.panda.common.hbase.ResultsExtractor;
+import cn.panda.common.hbase.RowMapper;
+import cn.panda.common.hbase.distributor.AbstractRowKeyDistributor;
 import cn.panda.common.server.bo.stat.AgentStatDataPoint;
+import cn.panda.common.server.utils.RowKeyUtils;
+import cn.panda.common.utils.BytesUtils;
+import cn.panda.common.utils.TimeUtils;
 import cn.panda.web.mapper.stat.AgentStatMapperV1;
+import cn.panda.web.vo.Range;
 import org.apache.hadoop.hbase.client.Result;
 import org.apache.hadoop.hbase.client.ResultScanner;
 import org.apache.hadoop.hbase.client.Scan;
@@ -30,17 +34,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-
-import cn.panda.common.hbase.HBaseTables;
-import cn.panda.common.hbase.HbaseOperations2;
-import cn.panda.common.hbase.ResultsExtractor;
-import cn.panda.common.hbase.RowMapper;
-import cn.panda.common.utils.BytesUtils;
-import cn.panda.common.server.utils.RowKeyUtils;
-import cn.panda.common.utils.TimeUtils;
-import cn.panda.web.vo.Range;
-import cn.panda.common.hbase.distributor.AbstractRowKeyDistributor;
 import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author emeroad
@@ -76,12 +74,7 @@ public class HbaseAgentStatDaoOperations {
             logger.debug("scanAgentStat : agentId={}, {}", agentId, range);
         }
 
-//        boolean useAggregated = range.getRange() > USE_AGGREGATED_THRESHOLD;
-//        if (useAggregated) {
-//            return getAggregatedAgentStatList(mapper, aggregator, agentId, range);
-//        } else {
         return getAgentStatListFromRaw(mapper, agentId, range);
-//        }
     }
 
     private <T extends AgentStatDataPoint> List<T> getAgentStatListFromRaw(AgentStatMapperV1<T> mapper, String agentId, Range range) {

@@ -15,7 +15,7 @@
  */
 package cn.panda.common.hbase.distributor;
 
-import cn.panda.utils.MathUtils;
+import cn.panda.common.utils.MathUtils;
 
 import java.util.Arrays;
 

@@ -1,6 +1,6 @@
 package cn.panda.lease;
 
-import cn.panda.utils.HasThread;
+import cn.panda.common.utils.HasThread;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.hadoop.hbase.util.EnvironmentEdgeManager;

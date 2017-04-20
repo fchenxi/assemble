@@ -16,9 +16,9 @@
 
 package cn.panda.common.hbase.parallel;
 
-import com.navercorp.pinpoint.common.hbase.TableFactory;
-import com.sematext.hbase.wd.AbstractRowKeyDistributor;
-import com.sematext.hbase.wd.DistributedScanner;
+import cn.panda.common.hbase.TableFactory;
+import cn.panda.common.hbase.distributor.AbstractRowKeyDistributor;
+import cn.panda.common.hbase.distributor.DistributedScanner;
 import org.apache.hadoop.hbase.TableName;
 import org.apache.hadoop.hbase.client.Result;
 import org.apache.hadoop.hbase.client.ResultScanner;

@@ -1,13 +1,13 @@
 package cn.panda.hbase.service;
 
-import cn.panda.hbase.distributor.AbstractRowKeyDistributor;
-import cn.panda.hbase.distributor.RowKeyDistributorByHashPrefix;
-import cn.panda.utils.TimeUtils;
+import cn.panda.common.hbase.distributor.AbstractRowKeyDistributor;
+import cn.panda.common.hbase.distributor.RowKeyDistributorByHashPrefix;
+import cn.panda.common.utils.TimeUtils;
 import org.junit.Before;
 import query.ThlRowKeyGenerator;
 import org.apache.hadoop.hbase.util.Bytes;
 import org.junit.Test;
-import query.HBaseQuery;
+import query.HBaseQueryV1;
 
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
@@ -23,11 +23,24 @@ public class HBaseQueryTest {
         System.setProperty("hadoop.home.dir", "d:\\winutil\\");
     }
 
-
     @Test
-    public void testQuery() throws UnsupportedEncodingException {
+    public void testSchemaRangeQuery() throws UnsupportedEncodingException {
 
-        HBaseQuery client = new HBaseQuery();
+        HBaseQueryV1 client = new HBaseQueryV1();
+        String HBASE_TABLE = "rowkey_range_test";
+        String schema = "retail_gms::auto_close_account_src";
+        short dmlType = 1;
+//        long startTS = 1598319566;
+//        long endTS = 1207324366;
+        long startTS = 1677324366;
+        long endTS = 1299999999;
+        client.query(HBASE_TABLE, schema, dmlType, startTS, endTS);
+
+    }
+    @Test
+    public void testTSRangeQuery() throws UnsupportedEncodingException {
+
+        HBaseQueryV1 client = new HBaseQueryV1();
         String HBASE_TABLE = "rowkey_range_test";
         String schema = "retail_gms::auto_close_account_src";
         short dmlType = 1;
@@ -42,7 +55,7 @@ public class HBaseQueryTest {
     public void testBatch()
             throws UnsupportedEncodingException {
 
-        HBaseQuery query = new HBaseQuery();
+        HBaseQueryV1 query = new HBaseQueryV1();
         String HBASE_TABLE = "rowkey_range_test";
         String schema = "gyl_gms";
         String table = "authority_user_category_rt";
@@ -97,7 +110,7 @@ public class HBaseQueryTest {
     @Test
     public void testSalteHash() {
 
-        HBaseQuery client = new HBaseQuery();
+        HBaseQueryV1 client = new HBaseQueryV1();
         String HBASE_TABLE = "rowkey_range_test";
         String schema = "retail_gms::auto_close_account_src";
         short dmlType = 3;
@@ -109,11 +122,11 @@ public class HBaseQueryTest {
                         new RowKeyDistributorByHashPrefix.OneByteSimpleHash(64));
         ThlRowKeyGenerator rowKeyGenerator = ThlRowKeyGenerator.getInstance();
         byte[] oriRowKey = new byte[0];
-        try {
-            oriRowKey = rowKeyGenerator.generateRowKey(startTS, schema, dmlType);
-        } catch (NoSuchAlgorithmException e) {
-
-        }
+//        try {
+//            oriRowKey = rowKeyGenerator.generateRowKey(startTS, schema, dmlType);
+//        } catch (NoSuchAlgorithmException e) {
+//
+//        }
         byte[] bucketRowKey = keyDistributor.getDistributedKey(oriRowKey);
 //        System.out.println("oriRowKey: " + Bytes.toStringBinary(oriRowKey));
 //        System.out.println("bucketRowKey: " +

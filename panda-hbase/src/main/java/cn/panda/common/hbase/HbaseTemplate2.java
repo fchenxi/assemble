@@ -20,9 +20,9 @@ import cn.panda.common.hbase.distributor.AbstractRowKeyDistributor;
 import cn.panda.common.hbase.distributor.DistributedScanner;
 import cn.panda.common.hbase.parallel.ParallelResultScanner;
 import cn.panda.common.hbase.parallel.ScanTaskException;
-import cn.panda.utils.ExecutorFactory;
-import cn.panda.utils.PinpointThreadFactory;
-import cn.panda.utils.StopWatch;
+import cn.panda.common.utils.ExecutorFactory;
+import cn.panda.common.utils.PinpointThreadFactory;
+import cn.panda.common.utils.StopWatch;
 import com.google.common.collect.Lists;
 
 import org.apache.hadoop.conf.Configuration;
