@@ -44,11 +44,9 @@ public class PooledHTableFactory implements TableFactory, DisposableBean {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @Value("${kerberos.hbase.principal}")
-    private String PRINCIPAL;
+    private final String PRINCIPAL = "tongchenxi/172.17.205.25@WONHIGH.CN";
 
-    @Value("${kerberos.hbase.keytab.path}")
-    private String KEYTAB_PATH;
+    private final String KEYTAB_PATH = "C:\\\\ProgramData\\\\Kerberos\\\\tongchenxi.keytab";
 
     public static final int DEFAULT_POOL_SIZE = 256;
     public static final int DEFAULT_WORKER_QUEUE_SIZE = 1024*5;
@@ -65,7 +63,7 @@ public class PooledHTableFactory implements TableFactory, DisposableBean {
     public PooledHTableFactory(Configuration config, int poolSize, int workerQueueSize, boolean prestartThreadPool) {
         this.executor = createExecutorService(poolSize, workerQueueSize, prestartThreadPool);
         try {
-            // Add kerberos
+            // kerberos
 //            config.addResource("hbase-site.xml");
             if ("kerberos".equalsIgnoreCase(config.get("hbase.security.authentication"))) {
                 config.set("hbase.security.authentication", "kerberos");
