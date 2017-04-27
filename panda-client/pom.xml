@@ -19,7 +19,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>panda</groupId>
+            <groupId>cn.panda</groupId>
             <artifactId>panda-common</artifactId>
             <version>${project.version}</version>
         </dependency>
