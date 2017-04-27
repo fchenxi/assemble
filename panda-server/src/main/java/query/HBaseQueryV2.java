@@ -62,8 +62,8 @@ public class HBaseQueryV2 {
         try {
             conn = ConnectionFactory.createConnection(conf);
             table = conn.getTable(TableName.valueOf(tableName));
-            Scan scan = new Scan(startRowKey, endRowKey);
-//            Scan scan = new Scan();
+//            Scan scan = new Scan(startRowKey, endRowKey);
+            Scan scan = new Scan();
             System.out.println("startRowKey: " + Bytes.toStringBinary(startRowKey));
             System.out.println("endRowKey  : " + Bytes.toStringBinary(endRowKey));
 
