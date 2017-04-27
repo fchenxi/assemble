@@ -17,16 +17,17 @@
         </property>
     </bean>
 
-    <context:component-scan base-package="cn.panda.web.dao.hbase,
+    <context:component-scan base-package="cn.panda.web.dao,
                                          cn.panda.web.service,
                                          cn.panda.web.mapper,
                                          cn.panda.web.filter,
                                          cn.panda.web.mapper.stat,
-                                         cn.panda.web.config,
-                                         cn.panda.web.view,
+                                         cn.panda.web.dao.hbase,
+                                         cn.panda.web.dao,
+                                         cn.panda.web.mapper,
                                          cn.panda.web.controller,
+                                         cn.panda.common.hbase,
                                          cn.panda.common.server.bo,
-                                        cn.panda.common.hbase.server.bo,
                                          cn.panda.common.server.utils"/>
     <mvc:annotation-driven/>
 

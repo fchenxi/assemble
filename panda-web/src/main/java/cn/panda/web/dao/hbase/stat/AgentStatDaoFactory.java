@@ -28,11 +28,13 @@ import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 /**
  * @author HyunGil Jeong
  */
+@Component
 abstract class AgentStatDaoFactory<T extends AgentStatDataPoint, D extends AgentStatDao<T>> {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -43,7 +45,7 @@ abstract class AgentStatDaoFactory<T extends AgentStatDataPoint, D extends Agent
     @Autowired
     private HBaseAdminTemplate adminTemplate;
 
-//    @Value("#{pinpointWebProps['web.stat.format.compatibility.version'] ?: 'v2'}")
+    @Value("#{'v2'}")
     private String mode = "v2";
 
     D getDao() throws Exception {

@@ -18,7 +18,12 @@
     <dependencies>
         <dependency>
             <groupId>cn.panda</groupId>
-            <artifactId>panda-server</artifactId>
+            <artifactId>panda-common</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.panda</groupId>
+            <artifactId>panda-hbase</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>

@@ -31,12 +31,12 @@
 
 	<property>
 		<name>hbase.rootdir</name>
-		<value>hdfs://nn209003:9000/dev_hbase</value> 
+		<value>hdfs://localhost:9000/hbase</value>
 	</property> 
 
 	<property>
 		<name>hbase.security.authentication</name>
-		<value>kerberos</value>
+		<value>simple</value>
 	</property>
 	<property>
 		<name>hbase.security.authorization</name>
@@ -96,7 +96,7 @@
 
 	<property>
 		<name>hbase.zookeeper.quorum</name>
-		<value>DC-log-001,DC-log-002,DC-log-003</value>
+		<value>localhost</value>
 	</property>
 
 	<property>
@@ -110,7 +110,7 @@
 	</property>
 	<property>
 		<name>zookeeper.znode.parent</name>
-		<value>/dev_hbase</value>
+		<value>/hbase</value>
 	</property>
 	<property>
 		<name>hbase.thrift.keytab.file</name>
