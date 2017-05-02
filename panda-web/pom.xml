@@ -31,6 +31,10 @@
             <artifactId>spring-web</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-beans</artifactId>
+        </dependency>
+        <dependency>
             <groupId>xerces</groupId>
             <artifactId>xercesImpl</artifactId>
         </dependency>
@@ -41,6 +45,20 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>2.6.7</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.6.7</version>
         </dependency>
         <dependency>
             <groupId>org.freemarker</groupId>
@@ -75,9 +93,13 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.1.0</version>
             <scope>test</scope>
         </dependency>
-
     </dependencies>
     <build>
         <finalName>dc-scheduler-web</finalName>

@@ -36,6 +36,7 @@ import javax.security.auth.login.AppConfigurationEntry;
 import javax.security.auth.login.AppConfigurationEntry.LoginModuleControlFlag;
 
 import cn.panda.annotation.InterfaceAudience;
+import cn.panda.common.zookeeper.ZKConfig;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

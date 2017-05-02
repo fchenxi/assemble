@@ -6,7 +6,7 @@
     <bean id="hbaseConfiguration" class="cn.panda.common.hbase.HbaseConfigurationFactoryBean">
         <property name="properties">
             <props>
-                <prop key="hbase.zookeeper.quorum">127.0.0.1</prop>
+                <prop key="hbase.zookeeper.quorum">${hbase.client.host}</prop>
                 <prop key="hbase.zookeeper.property.clientPort">2181</prop>
 
                 <!-- hbase default:true -->

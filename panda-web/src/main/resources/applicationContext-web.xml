@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p"
-       xmlns:util="http://www.springframework.org/schema/util"
-       xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd
-		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
-		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.1.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
-
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:beans="http://www.springframework.org/schema/beans"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
     <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="locations">
@@ -30,69 +30,49 @@
                                          cn.panda.common.server.bo,
                                          cn.panda.common.server.utils"/>
     <mvc:annotation-driven/>
+    <!--<tx:annotation-driven />-->
 
-    <import resource="classpath:applicationContext-hbase.xml" />
+    <import resource="classpath:applicationContext-hbase.xml"/>
+    <bean id="jsonObjectMapper" class="org.springframework.http.converter.json.Jackson2ObjectMapperFactoryBean">
+    </bean>
+    <mvc:annotation-driven>
+        <mvc:message-converters>
+            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+                <property name="objectMapper" ref="jsonObjectMapper"/>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+    <bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView">
+        <!-- another filter caches -->
+        <property name="disableCaching" value="false"/>
+    </bean>
+
+    <bean id="jsonpView" class="cn.panda.web.utils.MappingJackson2JsonpView">
+        <!-- another filter caches -->
+        <property name="disableCaching" value="false"/>
+    </bean>
+
+    <!--<bean id="viewResolver" class="org.springframework.web.servlet.view.BeanNameViewResolver"/>-->
+    <!--<bean id="viewResolver" class="org.springframework.web.servlet.view.BeanNameViewResolver"/>-->
+
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/views/" />
+        <property name="suffix" value=".jsp" />
+    </bean>
+
+    <mvc:interceptors>
+        <bean id="webContentInterceptor" class="org.springframework.web.servlet.mvc.WebContentInterceptor">
+            <property name="cacheSeconds" value="0"/>
+            <property name="useExpiresHeader" value="true"/>
+            <property name="useCacheControlHeader" value="true"/>
+            <property name="useCacheControlNoStore" value="true"/>
+        </bean>
+<!--        <mvc:interceptor>
+            <mvc:mapping path="/admin/**" />
+            <bean class="com.navercorp.pinpoint.web.interceptor.AdminAuthInterceptor" />
+        </mvc:interceptor>-->
+    </mvc:interceptors>
 
     <bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping"/>
     <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter"/>
-
-    <!-- 视图解析器，根据视图的名称new ModelAndView(name)，在配置文件查找对应的bean配置 -->
-    <bean class="org.springframework.web.servlet.view.BeanNameViewResolver">
-        <property name="order" value="1"/>
-    </bean>
-
-    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
-        <property name="messageConverters">
-            <util:list id="beanList">
-                <bean class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
-                    <property name="supportedMediaTypes">
-                        <list>
-                            <value>application/json;charset=UTF-8</value>
-                        </list>
-                    </property>
-                </bean>
-            </util:list>
-        </property>
-    </bean>
-
-    <bean name="jsonView"
-          class="org.springframework.web.servlet.view.json.MappingJacksonJsonView">
-        <property name="encoding">
-            <value type="org.codehaus.jackson.JsonEncoding">UTF8</value>
-        </property>
-        <property name="extractValueFromSingleKeyModel" value="true"></property>
-        <property name="contentType" value="application/json;charset=UTF-8"/>
-    </bean>
-    <bean
-            class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping"/>
-    <bean id="annotationMethodHandlerAdapter"
-          class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
-        <property name="messageConverters">
-            <list>
-                <ref bean="stringHttpMessageConverter"/>
-            </list>
-        </property>
-    </bean>
-    <!-- 需确认restTemplate的配置是否可被删除 -->
-    <bean id="restTemplate" class="org.springframework.web.client.RestTemplate">
-        <property name="messageConverters">
-            <list>
-                <ref bean="stringHttpMessageConverter"/>
-                <bean id="formHttpMessageConverter"
-                      class="org.springframework.http.converter.FormHttpMessageConverter"/>
-            </list>
-        </property>
-    </bean>
-    <bean id="stringHttpMessageConverter"
-          class="org.springframework.http.converter.StringHttpMessageConverter">
-        <property name="supportedMediaTypes">
-            <list>
-                <value>application/json;charset=UTF-8</value>
-            </list>
-        </property>
-    </bean>
-
-    <bean id="multipartResolver"
-          class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
-
 </beans>

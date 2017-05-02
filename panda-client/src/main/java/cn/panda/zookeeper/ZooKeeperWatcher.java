@@ -21,6 +21,7 @@ package cn.panda.zookeeper;
 import cn.panda.Abortable;
 import cn.panda.ZooKeeperConnectionException;
 import cn.panda.annotation.InterfaceAudience;
+import cn.panda.common.zookeeper.ZKConfig;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.hadoop.conf.Configuration;

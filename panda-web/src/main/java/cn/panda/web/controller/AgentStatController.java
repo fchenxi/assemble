@@ -44,17 +44,17 @@ public abstract class AgentStatController<T extends AgentStatDataPoint> {
     public AgentStatController(AgentStatService<T> agentStatService) {
         this.agentStatService = agentStatService;
     }
-    @RequestMapping(method = RequestMethod.GET)
-    @ResponseBody
-    public List<T> getAgentStat(
-            @RequestParam("agentId") String agentId,
-            @RequestParam("from") long from,
-            @RequestParam("to") long to) {
-        Range rangeToScan = new Range(from, to);
-        return this.agentStatService.selectAgentStatList(agentId, rangeToScan);
-    }
+//    @RequestMapping(value = "/", method = RequestMethod.GET)
+//    @ResponseBody
+//    public List<T> getAgentStat(
+//            @RequestParam("agentId") String agentId,
+//            @RequestParam("from") long from,
+//            @RequestParam("to") long to) {
+//        Range rangeToScan = new Range(from, to);
+//        return this.agentStatService.selectAgentStatList(agentId, rangeToScan);
+//    }
     @Controller
-    @RequestMapping("/getAgentStat/activeTrace")
+    @RequestMapping(value = "/getAgentStat/activeTrace")
     public static class ActiveTraceController extends AgentStatController<ActiveTraceBo> {
         @Autowired
         public ActiveTraceController(ActiveTraceService activeTraceService) {
