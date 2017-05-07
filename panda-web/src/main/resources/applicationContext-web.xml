@@ -27,6 +27,7 @@
                                          cn.panda.web.mapper,
                                          cn.panda.web.controller,
                                          cn.panda.common.hbase,
+                                         cn.panda.collector.dao.hbase.stat.stat,
                                          cn.panda.common.server.bo,
                                          cn.panda.common.server.utils"/>
     <mvc:annotation-driven/>

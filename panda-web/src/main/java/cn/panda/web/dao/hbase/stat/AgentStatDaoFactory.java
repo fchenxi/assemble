@@ -39,7 +39,6 @@ abstract class AgentStatDaoFactory<T extends AgentStatDataPoint, D extends Agent
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    protected D v1;
     protected D v2;
 
     @Autowired
@@ -54,28 +53,12 @@ abstract class AgentStatDaoFactory<T extends AgentStatDataPoint, D extends Agent
         final TableName v1TableName = HBaseTables.AGENT_STAT;
         final TableName v2TableName = HBaseTables.AGENT_STAT_VER2;
 
-        if (mode.equalsIgnoreCase("v1")) {
-            if (this.adminTemplate.tableExists(v1TableName)) {
-                return v1;
-            } else {
-                logger.error("AgentStatDao configured for v1, but {} table does not exist", v1TableName);
-                throw new IllegalStateException(v1TableName + " table does not exist");
-            }
-        } else if (mode.equalsIgnoreCase("v2")) {
+        if (mode.equalsIgnoreCase("v2")) {
             if (this.adminTemplate.tableExists(v2TableName)) {
                 return v2;
             } else {
                 logger.error("AgentStatDao configured for v2, but {} table does not exist", v2TableName);
                 throw new IllegalStateException(v2TableName + " table does not exist");
-            }
-        } else if (mode.equalsIgnoreCase("compatibilityMode")) {
-            boolean v1TableExists = this.adminTemplate.tableExists(v1TableName);
-            boolean v2TableExists = this.adminTemplate.tableExists(v2TableName);
-            if (v1TableExists && v2TableExists) {
-                return getCompatibilityDao(this.v1, this.v2);
-            } else {
-                logger.error("AgentStatDao configured for compatibilityMode, but {} and {} tables do not exist", v1TableName, v2TableName);
-                throw new IllegalStateException(v1TableName + ", " + v2TableName + " tables do not exist");
             }
         } else {
             throw new IllegalStateException("Unknown AgentStatDao configuration : " + mode);
@@ -86,11 +69,6 @@ abstract class AgentStatDaoFactory<T extends AgentStatDataPoint, D extends Agent
 
     @Repository("activeTraceDaoFactory")
     public static class ActiveTraceDaoFactory extends AgentStatDaoFactory<ActiveTraceBo, ActiveTraceDao> implements FactoryBean<ActiveTraceDao> {
-
-        @Autowired
-        public void setV1(@Qualifier("activeTraceDaoV1") ActiveTraceDao v1) {
-            this.v1 = v1;
-        }
 
         @Autowired
         public void setV2(@Qualifier("activeTraceDaoV2") ActiveTraceDao v2) {

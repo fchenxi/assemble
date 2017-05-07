@@ -28,7 +28,7 @@ import java.util.List;
 /**
  * @author HyunGil Jeong
  */
-@Service
+@Service("agentStatService")
 public class ActiveTraceService implements AgentStatService<ActiveTraceBo> {
 
     private final ActiveTraceDao activeTraceDao;

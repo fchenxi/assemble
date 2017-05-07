@@ -16,12 +16,17 @@
 
 package cn.panda.web.dao.hbase.stat.v2;
 
+import cn.panda.common.hbase.HBaseTables;
+import cn.panda.common.hbase.HbaseOperations2;
 import cn.panda.common.hbase.server.bo.codec.stat.ActiveTraceDecoder;
+import cn.panda.common.hbase.server.bo.serializer.stat.AgentStatHbaseOperationFactory;
 import cn.panda.common.server.bo.stat.ActiveTraceBo;
 import cn.panda.common.server.bo.stat.AgentStatType;
 import cn.panda.web.dao.hbase.stat.ActiveTraceDao;
 import cn.panda.web.mapper.stat.AgentStatMapperV2;
 import cn.panda.web.vo.Range;
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.hadoop.hbase.client.Put;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -39,6 +44,12 @@ public class HbaseActiveTraceDaoV2 implements ActiveTraceDao {
     @Autowired
     private HbaseAgentStatDaoOperationsV2 operations;
 
+    @Autowired
+    private HbaseOperations2 hbaseTemplate;
+
+    @Autowired
+    private AgentStatHbaseOperationFactory agentStatHbaseOperationFactory;
+
     @Override
     public List<ActiveTraceBo> getAgentStatList(String agentId, Range range) {
         AgentStatMapperV2<ActiveTraceBo> mapper = operations.createRowMapper(activeTraceDecoder, range);
@@ -49,5 +60,22 @@ public class HbaseActiveTraceDaoV2 implements ActiveTraceDao {
     public boolean agentStatExists(String agentId, Range range) {
         AgentStatMapperV2<ActiveTraceBo> mapper = operations.createRowMapper(activeTraceDecoder, range);
         return operations.agentStatExists(AgentStatType.ACTIVE_TRACE, mapper, agentId, range);
+    }
+
+    @Override
+    public void insert(String agentId, List<ActiveTraceBo> agentStatDataPoints) {
+        if (agentId == null) {
+            throw new NullPointerException("agentId must not be null");
+        }
+        if (agentStatDataPoints == null || agentStatDataPoints.isEmpty()) {
+            return;
+        }
+        List<Put> activeTracePuts = this.agentStatHbaseOperationFactory.createPuts(agentId, AgentStatType.ACTIVE_TRACE, agentStatDataPoints);
+        if (!activeTracePuts.isEmpty()) {
+            List<Put> rejectedPuts = this.hbaseTemplate.asyncPut(HBaseTables.AGENT_STAT_VER2, activeTracePuts);
+            if (CollectionUtils.isNotEmpty(rejectedPuts)) {
+                this.hbaseTemplate.put(HBaseTables.AGENT_STAT_VER2, rejectedPuts);
+            }
+        }
     }
 }

@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 
@@ -37,28 +38,34 @@ import java.util.List;
  * @author minwoo.jung
  * @author HyunGil Jeong
  */
-public abstract class AgentStatController<T extends AgentStatDataPoint> {
+@Controller
+public class AgentStatController<T extends AgentStatDataPoint> {
 
+    @Resource
     private final AgentStatService<T> agentStatService;
 
+    public void init() {
+
+    }
     public AgentStatController(AgentStatService<T> agentStatService) {
         this.agentStatService = agentStatService;
     }
-//    @RequestMapping(value = "/", method = RequestMethod.GET)
-//    @ResponseBody
-//    public List<T> getAgentStat(
-//            @RequestParam("agentId") String agentId,
-//            @RequestParam("from") long from,
-//            @RequestParam("to") long to) {
-//        Range rangeToScan = new Range(from, to);
-//        return this.agentStatService.selectAgentStatList(agentId, rangeToScan);
-//    }
-    @Controller
-    @RequestMapping(value = "/getAgentStat/activeTrace")
-    public static class ActiveTraceController extends AgentStatController<ActiveTraceBo> {
-        @Autowired
-        public ActiveTraceController(ActiveTraceService activeTraceService) {
-            super(activeTraceService);
-        }
+
+    @RequestMapping(value = "/getAgentStat/activeTrace", method = RequestMethod.GET)
+    @ResponseBody
+    public List<T> getAgentStat(
+            @RequestParam("agentId") String agentId,
+            @RequestParam("from") long from,
+            @RequestParam("to") long to) {
+        Range rangeToScan = new Range(from, to);
+        return this.agentStatService.selectAgentStatList(agentId, rangeToScan);
     }
+//    @Controller
+//    @RequestMapping(value = "/getAgentStat/activeTrace")
+//    public static class ActiveTraceController extends AgentStatController<ActiveTraceBo> {
+//        @Autowired
+//        public ActiveTraceController(ActiveTraceService activeTraceService) {
+//            super(activeTraceService);
+//        }
+//    }
 }

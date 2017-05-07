@@ -38,7 +38,7 @@ import static cn.panda.common.hbase.HBaseTables.AGENT_STAT_TIMESPAN_MS;
 /**
  * @author HyunGil Jeong
  */
-@Component
+//@Component
 public class AgentStatHbaseOperationFactory {
 
     private final AgentStatRowKeyEncoder rowKeyEncoder;
@@ -47,11 +47,11 @@ public class AgentStatHbaseOperationFactory {
 
     private final AbstractRowKeyDistributor rowKeyDistributor;
 
-    @Autowired
+//    @Autowired
     public AgentStatHbaseOperationFactory(
             AgentStatRowKeyEncoder rowKeyEncoder,
             AgentStatRowKeyDecoder rowKeyDecoder,
-            @Qualifier("agentStatV2RowKeyDistributor") AbstractRowKeyDistributor rowKeyDistributor) {
+            AbstractRowKeyDistributor rowKeyDistributor) {
         Assert.notNull(rowKeyEncoder, "rowKeyEncoder must not be null");
         Assert.notNull(rowKeyDecoder, "rowKeyDecoder must not be null");
         Assert.notNull(rowKeyDistributor, "rowKeyDistributor must not be null");
@@ -60,7 +60,7 @@ public class AgentStatHbaseOperationFactory {
         this.rowKeyDistributor = rowKeyDistributor;
     }
 
-    public <T extends AgentStatDataPoint> List<Put> createPuts(String agentId, AgentStatType agentStatType, List<T> agentStatDataPoints, HbaseSerializer<List<T>, Put> agentStatSerializer) {
+    public <T extends AgentStatDataPoint> List<Put> createPuts(String agentId, AgentStatType agentStatType, List<T> agentStatDataPoints) {
         if (agentStatDataPoints == null || agentStatDataPoints.isEmpty()) {
             return Collections.emptyList();
         }
@@ -75,7 +75,6 @@ public class AgentStatHbaseOperationFactory {
             byte[] distributedRowKey = this.rowKeyDistributor.getDistributedKey(rowKey);
 
             Put put = new Put(distributedRowKey);
-            agentStatSerializer.serialize(slottedAgentStatDataPoints, put, null);
             puts.add(put);
         }
         return puts;
