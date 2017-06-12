@@ -1,0 +1,464 @@
+{
+  "name" : "order_main",
+  "type" : "record",
+  "doc" : "Auto-generated Avro schema for order_main. Generated at 2017-05-17 03:22:50",
+  "namespace" : "retail_pos",
+  "meta" : "pk=id",
+  "fields" : [ {
+    "name" : "id",
+    "type" : [ "string", "null" ],
+    "meta" : "dbFieldName=id;dbFieldPosition=1;dbFieldType=char"
+  }, {
+    "name" : "company_no",
+    "type" : [ "string", "null" ],
+    "meta" : "dbFieldName=company_no;dbFieldPosition=2;dbFieldType=char"
+  }, {
+    "name" : "company_name",
+    "type" : [ "string", "null" ],
+    "meta" : "dbFieldName=company_name;dbFieldPosition=3;dbFieldType=varchar"
+  }, {
+    "name" : "order_no",
+    "type" : [ "string", "null" ],
+    "meta" : "dbFieldName=order_no;dbFieldPosition=4;dbFieldType=varchar"
+  }, {
+    "name" : "ref_bill_no",
+    "type" : [ "string", "null" ],
+    "meta" : "dbFieldName=ref_bill_no;dbFieldPosition=5;dbFieldType=char"
+  }, {
+    "name" : "shop_no",
+    "type" : [ "string", "null" ],
+    "meta" : "dbFieldName=shop_no;dbFieldPosition=6;dbFieldType=char"
+  }, {
+    "name" : "shop_name",
+    "type" : [ "string", "null" ],
+    "meta" : "dbFieldName=shop_name;dbFieldPosition=7;dbFieldType=varchar"
+  }, {
+    "name" : "shop_no_from",
+    "type" : [ "string", "null" ],
+    "meta" : "dbFieldName=shop_no_from;dbFieldPosition=8;dbFieldType=char"
+  }, {
+    "name" : "shop_name_from",
+    "type" : [ "string", "null" ],
+    "meta" : "dbFieldName=shop_name_from;dbFieldPosition=9;dbFieldType=varchar"
+  }, {
+    "name" : "serial_no",
+    "type" : [ "string", "null" ],
+    "meta" : "dbFieldName=serial_no;dbFieldPosition=10;dbFieldType=char"
+  }, {
+    "name" : "out_date",
+    "type" : [ "long", "null" ],
+    "meta" : "dbFieldName=out_date;dbFieldPosition=11;dbFieldType=date"
+  }, {
+    "name" : "qty",
+    "type" : [ "int", "null" ],
+    "meta" : "dbFieldName=qty;dbFieldPosition=12;dbFieldType=int"
+  }, {
+    "name" : "tag_price_amount",
+    "type" : [ "double", "null" ],
+    "meta" : "dbFieldName=tag_price_amount;dbFieldPosition=13;dbFieldType=decimal"
+  }, {
+    "name" : "sale_price_amount",
+    "type" : [ "double", "null" ],
+    "meta" : "dbFieldName=sale_price_amount;dbFieldPosition=14;dbFieldType=decimal"
+  }, {
+    "name" : "disc_price_amount",
+    "type" : [ "double", "null" ],
+    "meta" : "dbFieldName=disc_price_amount;dbFieldPosition=15;dbFieldType=decimal"
+  }, {
+    "name" : "settle_amount",
+    "type" : [ "double", "null" ],
+    "meta" : "dbFieldName=settle_amount;dbFieldPosition=16;dbFieldType=decimal"
+  }, {
+    "name" : "reduce_amount",
+    "type" : [ "double", "null" ],
+    "meta" : "dbFieldName=reduce_amount;dbFieldPosition=17;dbFieldType=decimal"
+  }, {
+    "name" : "total_rebate_amount",
+    "type" : [ "double", "null" ],
+    "meta" : "dbFieldName=total_rebate_amount;dbFieldPosition=18;dbFieldType=decimal"
+  }, {
+    "name" : "pref_amount",
+    "type" : [ "double", "null" ],
+    "meta" : "dbFieldName=pref_amount;dbFieldPosition=19;dbFieldType=decimal"
+  }, {
+    "name" : "coupon_amount",
+    "type" : [ "double", "null" ],
+    "meta" : "dbFieldName=coupon_amount;dbFieldPosition=20;dbFieldType=decimal"
+  }, {
+    "name" : "all_amount",
+    "type" : [ "double", "null" ],
+    "meta" : "dbFieldName=all_amount;dbFieldPosition=21;dbFieldType=decimal"
+  }, {
+    "name" : "amount",
+    "type" : [ "double", "null" ],
+    "meta" : "dbFieldName=amount;dbFieldPosition=22;dbFieldType=decimal"
+  }, {
+    "name" : "remain_amount",
+    "type" : [ "double", "null" ],
+    "meta" : "dbFieldName=remain_amount;dbFieldPosition=23;dbFieldType=decimal"
+  }, {
+    "name" : "score_amount",
+    "type" : [ "double", "null" ],
+    "meta" : "dbFieldName=score_amount;dbFieldPosition=24;dbFieldType=decimal"
+  }, {
+    "name" : "assistant_name",
+    "type" : [ "string", "null" ],
+    "meta" : "dbFieldName=assistant_name;dbFieldPosition=25;dbFieldType=varchar"
+  }, {
+    "name" : "assistant_id",
+    "type" : [ "string", "null" ],
+    "meta" : "dbFieldName=assistant_id;dbFieldPosition=26;dbFieldType=varchar"
+  }, {
+    "name" : "assistant_no",
+    "type" : [ "string", "null" ],
+    "meta" : "dbFieldName=assistant_no;dbFieldPosition=27;dbFieldType=varchar"
+  }, {
+    "name" : "vip_no",
+    "type" : [ "string", "null" ],
+    "meta" : "dbFieldName=vip_no;dbFieldPosition=28;dbFieldType=varchar"
+  }, {
+    "name" : "vip_brand_no",
+    "type" : [ "string", "null" ],
+    "meta" : "dbFieldName=vip_brand_no;dbFieldPosition=29;dbFieldType=char"
+  }, {
+    "name" : "vip_name",
+    "type" : [ "string", "null" ],
+    "meta" : "dbFieldName=vip_name;dbFieldPosition=30;dbFieldType=varchar"
+  }, {
+    "name" : "vip_phone",
+    "type" : [ "string", "null" ],
+    "meta" : "dbFieldName=vip_phone;dbFieldPosition=31;dbFieldType=varchar"
+  }, {
+    "name" : "wildcard_no",
+    "type" : [ "string", "null" ],
+    "meta" : "dbFieldName=wildcard_no;dbFieldPosition=32;dbFieldType=varchar"
+  }, {
+    "name" : "wildcard_name",
+    "type" : [ "string", "null" ],
+    "meta" : "dbFieldName=wildcard_name;dbFieldPosition=33;dbFieldType=varchar"
+  }, {
+    "name" : "wildcard_discount",
+    "type" : [ "double", "null" ],
+    "meta" : "dbFieldName=wildcard_discount;dbFieldPosition=34;dbFieldType=decimal"
+  }, {
+    "name" : "base_score",
+    "type" : [ "int", "null" ],
+    "meta" : "dbFieldName=base_score;dbFieldPosition=35;dbFieldType=int"
+  }, {
+    "name" : "pro_score",
+    "type" : [ "int", "null" ],
+    "meta" : "dbFieldName=pro_score;dbFieldPosition=36;dbFieldType=int"
+  }, {
+    "name" : "cost_score",
+    "type" : [ "int", "null" ],
+    "meta" : "dbFieldName=cost_score;dbFieldPosition=37;dbFieldType=int"
+  }, {
+    "name" : "order_type",
+    "type" : [ "int", "null" ],
+    "meta" : "dbFieldName=order_type;dbFieldPosition=38;dbFieldType=tinyint"
+  }, {
+    "name" : "business_type",
+    "type" : [ "int", "null" ],
+    "meta" : "dbFieldName=business_type;dbFieldPosition=39;dbFieldType=tinyint"
+  }, {
+    "name" : "biz_type_code",
+    "type" : [ "string", "null" ],
+    "meta" : "dbFieldName=biz_type_code;dbFieldPosition=40;dbFieldType=varchar"
+  }, {
+    "name" : "biz_type_name",
+    "type" : [ "string", "null" ],
+    "meta" : "dbFieldName=biz_type_name;dbFieldPosition=41;dbFieldType=varchar"
+  }, {
+    "name" : "order_source",
+    "type" : [ "int", "null" ],
+    "meta" : "dbFieldName=order_source;dbFieldPosition=42;dbFieldType=tinyint"
+  }, {
+    "name" : "daily_flag",
+    "type" : [ "int", "null" ],
+    "meta" : "dbFieldName=daily_flag;dbFieldPosition=43;dbFieldType=tinyint"
+  }, {
+    "name" : "daily_datetime",
+    "type" : [ "long", "null" ],
+    "meta" : "dbFieldName=daily_datetime;dbFieldPosition=44;dbFieldType=datetime"
+  }, {
+    "name" : "monthly_flag",
+    "type" : [ "int", "null" ],
+    "meta" : "dbFieldName=monthly_flag;dbFieldPosition=45;dbFieldType=tinyint"
+  }, {
+    "name" : "monthly_datetime",
+    "type" : [ "long", "null" ],
+    "meta" : "dbFieldName=monthly_datetime;dbFieldPosition=46;dbFieldType=datetime"
+  }, {
+    "name" : "balance_no",
+    "type" : [ "string", "null" ],
+    "meta" : "dbFieldName=balance_no;dbFieldPosition=47;dbFieldType=char"
+  }, {
+    "name" : "remark",
+    "type" : [ "string", "null" ],
+    "meta" : "dbFieldName=remark;dbFieldPosition=48;dbFieldType=varchar"
+  }, {
+    "name" : "status",
+    "type" : [ "int", "null" ],
+    "meta" : "dbFieldName=status;dbFieldPosition=49;dbFieldType=tinyint"
+  }, {
+    "name" : "actual_postage",
+    "type" : [ "double", "null" ],
+    "meta" : "dbFieldName=actual_postage;dbFieldPosition=50;dbFieldType=decimal"
+  }, {
+    "name" : "message_code",
+    "type" : [ "string", "null" ],
+    "meta" : "dbFieldName=message_code;dbFieldPosition=51;dbFieldType=varchar"
+  }, {
+    "name" : "express_company",
+    "type" : [ "string", "null" ],
+    "meta" : "dbFieldName=express_company;dbFieldPosition=52;dbFieldType=varchar"
+  }, {
+    "name" : "bill_transfer_no",
+    "type" : [ "string", "null" ],
+    "meta" : "dbFieldName=bill_transfer_no;dbFieldPosition=53;dbFieldType=varchar"
+  }, {
+    "name" : "express_no",
+    "type" : [ "string", "null" ],
+    "meta" : "dbFieldName=express_no;dbFieldPosition=54;dbFieldType=varchar"
+  }, {
+    "name" : "logistics_no",
+    "type" : [ "string", "null" ],
+    "meta" : "dbFieldName=logistics_no;dbFieldPosition=55;dbFieldType=varchar"
+  }, {
+    "name" : "take_mode",
+    "type" : [ "int", "null" ],
+    "meta" : "dbFieldName=take_mode;dbFieldPosition=56;dbFieldType=tinyint"
+  }, {
+    "name" : "logistics_mode",
+    "type" : [ "int", "null" ],
+    "meta" : "dbFieldName=logistics_mode;dbFieldPosition=57;dbFieldType=tinyint"
+  }, {
+    "name" : "market_ticket_no",
+    "type" : [ "string", "null" ],
+    "meta" : "dbFieldName=market_ticket_no;dbFieldPosition=58;dbFieldType=varchar"
+  }, {
+    "name" : "lock_flag",
+    "type" : [ "int", "null" ],
+    "meta" : "dbFieldName=lock_flag;dbFieldPosition=59;dbFieldType=tinyint"
+  }, {
+    "name" : "return_exchange_time",
+    "type" : [ "int", "null" ],
+    "meta" : "dbFieldName=return_exchange_time;dbFieldPosition=60;dbFieldType=tinyint"
+  }, {
+    "name" : "shop_terminal_no",
+    "type" : [ "string", "null" ],
+    "meta" : "dbFieldName=shop_terminal_no;dbFieldPosition=61;dbFieldType=varchar"
+  }, {
+    "name" : "invoice_apply_no",
+    "type" : [ "string", "null" ],
+    "meta" : "dbFieldName=invoice_apply_no;dbFieldPosition=62;dbFieldType=char"
+  }, {
+    "name" : "invoice_apply_date",
+    "type" : [ "long", "null" ],
+    "meta" : "dbFieldName=invoice_apply_date;dbFieldPosition=63;dbFieldType=datetime"
+  }, {
+    "name" : "invoice_no",
+    "type" : [ "string", "null" ],
+    "meta" : "dbFieldName=invoice_no;dbFieldPosition=64;dbFieldType=varchar"
+  }, {
+    "name" : "invoice_amount",
+    "type" : [ "double", "null" ],
+    "meta" : "dbFieldName=invoice_amount;dbFieldPosition=65;dbFieldType=decimal"
+  }, {
+    "name" : "invoice_date",
+    "type" : [ "long", "null" ],
+    "meta" : "dbFieldName=invoice_date;dbFieldPosition=66;dbFieldType=date"
+  }, {
+    "name" : "pickup_date",
+    "type" : [ "long", "null" ],
+    "meta" : "dbFieldName=pickup_date;dbFieldPosition=67;dbFieldType=date"
+  }, {
+    "name" : "zone_yyyymm",
+    "type" : [ "string", "null" ],
+    "meta" : "dbFieldName=zone_yyyymm;dbFieldPosition=68;dbFieldType=char"
+  }, {
+    "name" : "check_user_no",
+    "type" : [ "string", "null" ],
+    "meta" : "dbFieldName=check_user_no;dbFieldPosition=69;dbFieldType=varchar"
+  }, {
+    "name" : "check_user",
+    "type" : [ "string", "null" ],
+    "meta" : "dbFieldName=check_user;dbFieldPosition=70;dbFieldType=varchar"
+  }, {
+    "name" : "create_user_no",
+    "type" : [ "string", "null" ],
+    "meta" : "dbFieldName=create_user_no;dbFieldPosition=71;dbFieldType=varchar"
+  }, {
+    "name" : "create_user",
+    "type" : [ "string", "null" ],
+    "meta" : "dbFieldName=create_user;dbFieldPosition=72;dbFieldType=varchar"
+  }, {
+    "name" : "create_time",
+    "type" : [ "long", "null" ],
+    "meta" : "dbFieldName=create_time;dbFieldPosition=73;dbFieldType=datetime"
+  }, {
+    "name" : "update_user_no",
+    "type" : [ "string", "null" ],
+    "meta" : "dbFieldName=update_user_no;dbFieldPosition=74;dbFieldType=varchar"
+  }, {
+    "name" : "update_user",
+    "type" : [ "string", "null" ],
+    "meta" : "dbFieldName=update_user;dbFieldPosition=75;dbFieldType=varchar"
+  }, {
+    "name" : "update_time",
+    "type" : [ "long", "null" ],
+    "meta" : "dbFieldName=update_time;dbFieldPosition=76;dbFieldType=datetime"
+  }, {
+    "name" : "adjust_flag",
+    "type" : [ "int", "null" ],
+    "meta" : "dbFieldName=adjust_flag;dbFieldPosition=77;dbFieldType=tinyint"
+  }, {
+    "name" : "adjust_user",
+    "type" : [ "string", "null" ],
+    "meta" : "dbFieldName=adjust_user;dbFieldPosition=78;dbFieldType=varchar"
+  }, {
+    "name" : "adjust_time",
+    "type" : [ "long", "null" ],
+    "meta" : "dbFieldName=adjust_time;dbFieldPosition=79;dbFieldType=datetime"
+  }, {
+    "name" : "adjust_order_reason",
+    "type" : [ "string", "null" ],
+    "meta" : "dbFieldName=adjust_order_reason;dbFieldPosition=80;dbFieldType=varchar"
+  }, {
+    "name" : "reason_class_name",
+    "type" : [ "string", "null" ],
+    "meta" : "dbFieldName=reason_class_name;dbFieldPosition=81;dbFieldType=varchar"
+  }, {
+    "name" : "reason_class_no",
+    "type" : [ "string", "null" ],
+    "meta" : "dbFieldName=reason_class_no;dbFieldPosition=82;dbFieldType=varchar"
+  }, {
+    "name" : "reason_code",
+    "type" : [ "string", "null" ],
+    "meta" : "dbFieldName=reason_code;dbFieldPosition=83;dbFieldType=varchar"
+  }, {
+    "name" : "responsibility_name",
+    "type" : [ "string", "null" ],
+    "meta" : "dbFieldName=responsibility_name;dbFieldPosition=84;dbFieldType=varchar"
+  }, {
+    "name" : "responsibility_no",
+    "type" : [ "string", "null" ],
+    "meta" : "dbFieldName=responsibility_no;dbFieldPosition=85;dbFieldType=varchar"
+  }, {
+    "name" : "responsibility_id",
+    "type" : [ "string", "null" ],
+    "meta" : "dbFieldName=responsibility_id;dbFieldPosition=86;dbFieldType=varchar"
+  }, {
+    "name" : "sharding_flag",
+    "type" : [ "string", "null" ],
+    "meta" : "dbFieldName=sharding_flag;dbFieldPosition=87;dbFieldType=varchar"
+  }, {
+    "name" : "remain_score",
+    "type" : [ "int", "null" ],
+    "meta" : "dbFieldName=remain_score;dbFieldPosition=88;dbFieldType=int"
+  }, {
+    "name" : "accumulated_score",
+    "type" : [ "int", "null" ],
+    "meta" : "dbFieldName=accumulated_score;dbFieldPosition=89;dbFieldType=int"
+  }, {
+    "name" : "notice_user",
+    "type" : [ "string", "null" ],
+    "meta" : "dbFieldName=notice_user;dbFieldPosition=90;dbFieldType=varchar"
+  }, {
+    "name" : "notice_time",
+    "type" : [ "long", "null" ],
+    "meta" : "dbFieldName=notice_time;dbFieldPosition=91;dbFieldType=datetime"
+  }, {
+    "name" : "notice_flag",
+    "type" : [ "int", "null" ],
+    "meta" : "dbFieldName=notice_flag;dbFieldPosition=92;dbFieldType=tinyint"
+  }, {
+    "name" : "pay_time",
+    "type" : [ "long", "null" ],
+    "meta" : "dbFieldName=pay_time;dbFieldPosition=93;dbFieldType=datetime"
+  }, {
+    "name" : "refund_status",
+    "type" : [ "int", "null" ],
+    "meta" : "dbFieldName=refund_status;dbFieldPosition=94;dbFieldType=tinyint"
+  }, {
+    "name" : "place_date",
+    "type" : [ "long", "null" ],
+    "meta" : "dbFieldName=place_date;dbFieldPosition=95;dbFieldType=date"
+  }, {
+    "name" : "reprint",
+    "type" : [ "int", "null" ],
+    "meta" : "dbFieldName=reprint;dbFieldPosition=96;dbFieldType=tinyint"
+  }, {
+    "name" : "adjust_inventory_flag",
+    "type" : [ "int", "null" ],
+    "meta" : "dbFieldName=adjust_inventory_flag;dbFieldPosition=97;dbFieldType=tinyint"
+  }, {
+    "name" : "platform_no",
+    "type" : [ "string", "null" ],
+    "meta" : "dbFieldName=platform_no;dbFieldPosition=98;dbFieldType=char"
+  }, {
+    "name" : "platform_name",
+    "type" : [ "string", "null" ],
+    "meta" : "dbFieldName=platform_name;dbFieldPosition=99;dbFieldType=char"
+  }, {
+    "name" : "delivery_time",
+    "type" : [ "long", "null" ],
+    "meta" : "dbFieldName=delivery_time;dbFieldPosition=100;dbFieldType=datetime"
+  }, {
+    "name" : "delivery_date",
+    "type" : [ "long", "null" ],
+    "meta" : "dbFieldName=delivery_date;dbFieldPosition=101;dbFieldType=date"
+  }, {
+    "name" : "invoice_type",
+    "type" : [ "int", "null" ],
+    "meta" : "dbFieldName=invoice_type;dbFieldPosition=102;dbFieldType=tinyint"
+  }, {
+    "name" : "invoice_unit",
+    "type" : [ "string", "null" ],
+    "meta" : "dbFieldName=invoice_unit;dbFieldPosition=103;dbFieldType=varchar"
+  }, {
+    "name" : "invoice_content",
+    "type" : [ "string", "null" ],
+    "meta" : "dbFieldName=invoice_content;dbFieldPosition=104;dbFieldType=varchar"
+  }, {
+    "name" : "is_package_mail_flag",
+    "type" : [ "int", "null" ],
+    "meta" : "dbFieldName=is_package_mail_flag;dbFieldPosition=105;dbFieldType=tinyint"
+  }, {
+    "name" : "member_id",
+    "type" : [ "string", "null" ],
+    "meta" : "dbFieldName=member_id;dbFieldPosition=106;dbFieldType=varchar"
+  }, {
+    "name" : "out_time",
+    "type" : [ "long", "null" ],
+    "meta" : "dbFieldName=out_time;dbFieldPosition=107;dbFieldType=datetime"
+  }, {
+    "name" : "client_no",
+    "type" : [ "string", "null" ],
+    "meta" : "dbFieldName=client_no;dbFieldPosition=108;dbFieldType=char"
+  }, {
+    "name" : "client_name",
+    "type" : [ "string", "null" ],
+    "meta" : "dbFieldName=client_name;dbFieldPosition=109;dbFieldType=varchar"
+  }, {
+    "name" : "dispatch_flag",
+    "type" : [ "int", "null" ],
+    "meta" : "dbFieldName=dispatch_flag;dbFieldPosition=110;dbFieldType=tinyint"
+  }, {
+    "name" : "sync_isp_flag",
+    "type" : [ "int", "null" ],
+    "meta" : "dbFieldName=sync_isp_flag;dbFieldPosition=111;dbFieldType=tinyint"
+  }, {
+    "name" : "card_no_bg",
+    "type" : [ "string", "null" ],
+    "meta" : "dbFieldName=card_no_bg;dbFieldPosition=112;dbFieldType=varchar"
+  }, {
+    "name" : "return_in_source",
+    "type" : [ "string", "null" ],
+    "meta" : "dbFieldName=return_in_source;dbFieldPosition=113;dbFieldType=char"
+  }, {
+    "name" : "order_refuse_count",
+    "type" : [ "int", "null" ],
+    "meta" : "dbFieldName=order_refuse_count;dbFieldPosition=114;dbFieldType=int"
+  } ]
+}

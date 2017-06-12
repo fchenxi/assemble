@@ -9,7 +9,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class AlarmSendingThread extends AbstractTerminatableThread{
+public class AlarmSendingThread extends AbstractTerminatableThread {
 
     private final AlarmAgent alarmAgent = new AlarmAgent();
 
@@ -28,24 +28,25 @@ public class AlarmSendingThread extends AbstractTerminatableThread{
         alarm = alarmQueue.take();
         terminationToken.reservations.decrementAndGet();
 
-        try{
+        try {
             alarmAgent.sendAlarm(alarm);
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new RuntimeException(e.getMessage());
         }
 
-        if(AlarmType.RESUME == alarm.type){
+        if (AlarmType.RESUME == alarm.type) {
             String key = AlarmType.FAULT.toString() + ":" + alarm.getId() + '@'
                     + alarm.getExtraInfo();
             submittedAlarmRegistry.remove(key);
         }
     }
-    public int sendAlarm(AlarmInfo alarmInfo){
+
+    public int sendAlarm(AlarmInfo alarmInfo) {
         AlarmType type = alarmInfo.type;
         String id = alarmInfo.getId();
         String extraInfo = alarmInfo.getExtraInfo();
 
-        if(terminationToken.isToShutdown()){
+        if (terminationToken.isToShutdown()) {
             System.err.println("rejected alarm: " + id + " , " + extraInfo);
             return -1;
         }
@@ -55,22 +56,22 @@ public class AlarmSendingThread extends AbstractTerminatableThread{
             prevSubmittedCounter = submittedAlarmRegistry.putIfAbsent(
                     type.toString() + ":" + '@' + extraInfo, new AtomicInteger(0));
 
-            if (prevSubmittedCounter == null){
+            if (prevSubmittedCounter == null) {
                 terminationToken.reservations.incrementAndGet();
                 alarmQueue.put(alarmInfo);
             } else {
                 duplicateSubmissionCount = prevSubmittedCounter.incrementAndGet();
             }
 
-        }catch (Throwable e){
+        } catch (Throwable e) {
             throw new RuntimeException(e.getMessage());
         }
         return duplicateSubmissionCount;
     }
 
     @Override
-    protected void doCleanup(Exception e){
-        if(e != null && !(e instanceof InterruptedException)){
+    protected void doCleanup(Exception e) {
+        if (e != null && !(e instanceof InterruptedException)) {
             System.err.println(e.getMessage());
         }
         alarmAgent.disconnect();

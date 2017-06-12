@@ -26,14 +26,17 @@ public class HBaseQueryV1 {
     private static Configuration conf = null;
     private String PRINCIPAL;
     private String KEYTAB_PATH;
+//    private final static TableName tableName = TableName.valueOf("rowkey_range_test");
+    private final static TableName tableName = TableName.valueOf("transaction_history");
+
     private final byte[] COLUMN_FAMILY_NAME = Bytes.toBytes("R");
     private final byte[] COLUMN_NAME = Bytes.toBytes("id");
     private final long BATCH_SIZE_MILLION = 1000000;
-    private final byte BUCKET_SIZE = (byte)5;
-    private final String[] SCHEMA_NAME = {"retail_gms::auto_close_account_src","retail_gms::account_bill_pool_sp",
-            "retail_gms::bill_account_control_src","gyl_gms::authority_user_category_rt","retail_gos::inventory_book"};
-    private final byte[] lowerPrefix = new byte[] { 0x0 };
-    private final byte[] upperPrefix = new byte[] { 0x0 };
+    private final byte BUCKET_SIZE = (byte) 5;
+    private final String[] SCHEMA_NAME = {"retail_gms", "retail_gms", "retail_gms", "gyl_gms",
+            "retail_gos"};
+    private final byte[] lowerPrefix = new byte[]{0x0};
+    private final byte[] upperPrefix = new byte[]{0x0};
 
     private Connection conn;
     private static ThlRowKeyGenerator rowKeyGenerator;
@@ -47,38 +50,39 @@ public class HBaseQueryV1 {
         userLogin();
     }
 
-    public void batch(String tableName, String schema, String queryTable, short dmlType, short nodeIndex,
-                      long startTS, long seqNo, short fragNo) {
+    public void batch(String tableName, String schema, String queryTable, short dmlType,
+                      short nodeIndex, long startTS, long seqNo, short fragNo) {
 
         Table table = null;
         try {
             conn = ConnectionFactory.createConnection(conf);
             table = conn.getTable(TableName.valueOf(tableName));
-            for (int i = 0; i < BATCH_SIZE_MILLION; i++) {
-                dmlType = (short) new Random().nextInt(3);
+            for (int i = 0; i < 10; i++) {
+//                dmlType = (short) new Random().nextInt(3);
+                dmlType = 0;
                 int schemaRandomIndex = new Random().nextInt(5);
                 startTS += i * 10000;
                 byte[] oriRowKey = new byte[0];
-
                 try {
-                    oriRowKey = rowKeyGenerator.generateRowKey(startTS, SCHEMA_NAME[schemaRandomIndex],
-                            queryTable,dmlType, nodeIndex, seqNo, fragNo);
+                    oriRowKey = rowKeyGenerator.generateRowKey(startTS,
+                            SCHEMA_NAME[schemaRandomIndex], queryTable, dmlType, nodeIndex,
+                            seqNo, fragNo);
                 } catch (NoSuchAlgorithmException e) {
                     e.printStackTrace();
                 }
-                // Hash prefix with 64 buckets
-//                    AbstractRowKeyDistributor keyDistributor =
-//                            new RowKeyDistributorByHashPrefix(
-//                                    new RowKeyDistributorByHashPrefix.OneByteSimpleHash(BUCKET_SIZE));
-//
-//                    byte[] bucketRowKey = keyDistributor.getDistributedKey(oriRowKey);
-//                    Put put = new Put(bucketRowKey);
-                    Put put = new Put(oriRowKey);
-                    logger.info("bucketRowKey: " + Bytes.toStringBinary(oriRowKey));
-                    put.addColumn(COLUMN_FAMILY_NAME, COLUMN_NAME, Bytes.toBytes(String.valueOf(i)));
-                    table.put(put);
+//                 Hash prefix with 64 buckets
+                AbstractRowKeyDistributor keyDistributor =
+                        new RowKeyDistributorByHashPrefix(
+                                new RowKeyDistributorByHashPrefix.OneByteSimpleHash(BUCKET_SIZE));
 
-
+                byte[] bucketRowKey = keyDistributor.getDistributedKey(oriRowKey);
+                Put put = new Put(bucketRowKey);
+//                    Put put = new Put(oriRowKey);
+                logger.info("oriRowKey: " + Bytes.toStringBinary(oriRowKey));
+                logger.info("bucketRowKey: " + Bytes.toStringBinary(bucketRowKey));
+                System.out.println();
+                put.addColumn(COLUMN_FAMILY_NAME, COLUMN_NAME, Bytes.toBytes(String.valueOf(i)));
+                table.put(put);
             }
 
         } catch (IOException e) {
@@ -99,22 +103,22 @@ public class HBaseQueryV1 {
             }
         }
     }
-    public void query(String tableName, String schema, short dmlType,
-                          long startTS, long endTS)
+
+    public void query(String schema, String t, short dmlType,
+                      long startTS, long endTS, short nodeIndex, long seqNo, short fragNo)
             throws UnsupportedEncodingException {
 
         Table table = null;
         ResultScanner results = null;
-
-
-
         try {
             conn = ConnectionFactory.createConnection(conf);
-            table = conn.getTable(TableName.valueOf(tableName));
-            byte[] startRow = new byte[0];
-            byte[] endRow = new byte[0];
-//            byte[] startRow = rowKeyGenerator.generateRowKey(startTS, schema, dmlType);
-//            byte[] endRow = rowKeyGenerator.generateRowKey(endTS, schema, dmlType);
+            table = conn.getTable(tableName);
+//            byte[] startRow = new byte[0];
+//            byte[] endRow = new byte[0];
+            byte[] startRow = rowKeyGenerator.generateRowKey(startTS, schema, t,
+                    nodeIndex, dmlType, seqNo, fragNo);
+            byte[] endRow = rowKeyGenerator.generateRowKey(endTS, schema,
+                    t, nodeIndex, dmlType, seqNo, fragNo);
 //            startRow = Bytes.add(lowerPrefix, startRow);
 //            endRow = Bytes.add(upperPrefix, endRow);
             Scan scan = new Scan(startRow, endRow);
@@ -125,8 +129,16 @@ public class HBaseQueryV1 {
             results = DistributedScanner.create(table, scan, keyDistributor);
 
             logger.info("------------------- query condition -------------------");
-            logger.info("bucketStartRow: " + Bytes.toStringBinary(keyDistributor.getDistributedKey(startRow)));
-            logger.info("bucketEndRow: " + Bytes.toStringBinary(keyDistributor.getDistributedKey(endRow)));
+            logger.info("startTS: " + startTS);
+            logger.info("endTS: " + endTS);
+
+            logger.info("endTS: " + Bytes.toStringBinary(keyDistributor
+                    .getDistributedKey(startRow)));
+
+            logger.info("bucketStartRow: " + Bytes.toStringBinary(keyDistributor
+                    .getDistributedKey(startRow)));
+            logger.info("bucketEndRow: " + Bytes.toStringBinary(keyDistributor.getDistributedKey
+                    (endRow)));
 
 //            results = table.getScanner(scan);
             logger.info("------------------- query result -------------------");
@@ -181,7 +193,8 @@ public class HBaseQueryV1 {
         String HBASE_MASTER_PRINCIPAL = env.getProperty("dc.env.kerberos.hbase.master.principal");
         String HBASE_RS_PRINCIPAL = env.getProperty("dc.env.kerberos.hbase.region.principal");
         String ZOOKEEPER_QUORUM = env.getProperty("dc.env.kerberos.hbase.zookeeper.quorum");
-        String ZOOKEEPER_CLIENTPORT = env.getProperty("dc.env.kerberos.zookeeper.property.clientPort");
+        String ZOOKEEPER_CLIENTPORT = env.getProperty("dc.env.kerberos.zookeeper.property" +
+                ".clientPort");
         String ZNODE_PARENT = env.getProperty("dc.env.zookeeper.znode.parent");
         PRINCIPAL = env.getProperty("dc.env.kerberos.hbase.principal");
         KEYTAB_PATH = env.getProperty("dc.env.kerberos.hbase.keytab.path");
@@ -189,14 +202,15 @@ public class HBaseQueryV1 {
         conf = HBaseConfiguration.create();
         conf.addResource("hbase-site.xml");
 
-        conf.set("hbase.master.kerberos.principal", HBASE_MASTER_PRINCIPAL);
-        conf.set("hbase.regionserver.kerberos.principal", HBASE_RS_PRINCIPAL);
+//        conf.set("hbase.master.kerberos.principal", HBASE_MASTER_PRINCIPAL);
+//        conf.set("hbase.regionserver.kerberos.principal", HBASE_RS_PRINCIPAL);
         conf.set("kerberos.principal", PRINCIPAL);
         conf.set("hbase.zookeeper.quorum", ZOOKEEPER_QUORUM);
         conf.set("hbase.zookeeper.property.clientPort", ZOOKEEPER_CLIENTPORT);
         conf.set("zookeeper.znode.parent", ZNODE_PARENT);
     }
-    public static void main(String[] args){
+
+    public static void main(String[] args) {
 
     }
 

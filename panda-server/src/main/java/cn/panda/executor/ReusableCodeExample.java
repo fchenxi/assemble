@@ -5,6 +5,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
 public class ReusableCodeExample {
+
     public static void main(String[] args) throws InterruptedException, ExecutionException {
         SomeService ss = new SomeService();
         ss.init();
@@ -14,6 +15,7 @@ public class ReusableCodeExample {
         ss.shutdown();
 
     }
+
     private static class Task {
         private final String message;
         private final int id;
@@ -23,7 +25,8 @@ public class ReusableCodeExample {
             this.id = id;
         }
     }
-    private static class SomeService extends AbstractSerializer<Task, String>{
+
+    private static class SomeService extends AbstractSerializer<Task, String> {
         public SomeService() {
             super(new ArrayBlockingQueue<Runnable>(100), new TaskProcessor<Task, String>() {
                 @Override
@@ -36,10 +39,11 @@ public class ReusableCodeExample {
 
         @Override
         protected Task makeTask(Object... params) {
-            String message = (String)params[0];
-            int id = (Integer)params[1];
+            String message = (String) params[0];
+            int id = (Integer) params[1];
             return new Task(message, id);
         }
+
         public Future<String> doSomething(String message, int id) throws InterruptedException {
             Future<String> result = null;
             result = super.service(message, id);

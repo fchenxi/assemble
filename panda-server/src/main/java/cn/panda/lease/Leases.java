@@ -26,11 +26,11 @@ public class Leases extends HasThread {
         long nextLeaseDelay = Long.MAX_VALUE;
         nextLease = null;
         nextLeaseDelay = Long.MAX_VALUE;
-        for (Iterator<Map.Entry<String, Lease>> it = leases.entrySet().iterator(); it.hasNext();) {
+        for (Iterator<Map.Entry<String, Lease>> it = leases.entrySet().iterator(); it.hasNext(); ) {
             Map.Entry<String, Lease> entry = it.next();
             Lease lease = entry.getValue();
             long thisLeaseDelay = lease.getDelay(TimeUnit.MILLISECONDS);
-            if ( thisLeaseDelay > 0) {
+            if (thisLeaseDelay > 0) {
                 if (nextLease == null || thisLeaseDelay < nextLeaseDelay) {
                     nextLease = lease;
                     nextLeaseDelay = thisLeaseDelay;
@@ -42,18 +42,20 @@ public class Leases extends HasThread {
                     LOG.error("lease listener is null for lease " + lease.getLeaseName());
                 } else {
                     lease.getListener().leaseExpired();
-                    LOG.error("lease " + lease.getLeaseName() + " expired: " + lease.expirationTime + " current: " + EnvironmentEdgeManager.currentTime() );
+                    LOG.error("lease " + lease.getLeaseName() + " expired: " + lease
+                            .expirationTime + " current: " + EnvironmentEdgeManager.currentTime());
                 }
                 it.remove();
             }
         }
     }
+
     /**
      * Create a lease and insert it to the map of leases.
      *
-     * @param leaseName name of the lease
+     * @param leaseName          name of the lease
      * @param leaseTimeoutPeriod length of the lease in milliseconds
-     * @param listener listener that will process lease expirations
+     * @param listener           listener that will process lease expirations
      * @throws LeaseStillHeldException
      */
     public void createLease(String leaseName, int leaseTimeoutPeriod, final LeaseListener listener)
@@ -63,6 +65,7 @@ public class Leases extends HasThread {
 
     /**
      * Inserts lease.  Resets expiration before insertion.
+     *
      * @param lease
      * @throws LeaseStillHeldException
      */
@@ -98,6 +101,7 @@ public class Leases extends HasThread {
 
     /**
      * Client explicitly cancels a lease.
+     *
      * @param leaseName name of lease
      * @throws org.apache.hadoop.hbase.regionserver.LeaseException
      */
@@ -111,8 +115,8 @@ public class Leases extends HasThread {
      * Lease can be reinserted using {@link #addLease(Lease)}
      *
      * @param leaseName name of lease
-     * @throws org.apache.hadoop.hbase.regionserver.LeaseException
      * @return Removed lease
+     * @throws org.apache.hadoop.hbase.regionserver.LeaseException
      */
     Lease removeLease(final String leaseName) throws LeaseException {
         Lease lease = leases.remove(leaseName);
@@ -121,6 +125,7 @@ public class Leases extends HasThread {
         }
         return lease;
     }
+
     /**
      * Thrown if we are asked to create a lease but lease on passed name already
      * exists.
@@ -136,11 +141,14 @@ public class Leases extends HasThread {
             this.leaseName = name;
         }
 
-        /** @return name of lease */
+        /**
+         * @return name of lease
+         */
         public String getName() {
             return this.leaseName;
         }
     }
+
     static class Lease implements Delayed {
         private final String leaseName;
         private final LeaseListener listener;
@@ -153,10 +161,12 @@ public class Leases extends HasThread {
             this.leaseTimeoutPeriod = leaseTimeoutPeriod;
             this.expirationTime = 0;
         }
+
         public long getDelay(TimeUnit unit) {
             return unit.convert(this.expirationTime - EnvironmentEdgeManager.currentTime(),
                     TimeUnit.MILLISECONDS);
         }
+
         public LeaseListener getListener() {
             return listener;
         }
@@ -164,12 +174,14 @@ public class Leases extends HasThread {
         public String getLeaseName() {
             return leaseName;
         }
+
         public int compareTo(Delayed o) {
             long delta = this.getDelay(TimeUnit.MILLISECONDS) -
                     o.getDelay(TimeUnit.MILLISECONDS);
 
             return this.equals(o) ? 0 : (delta > 0 ? 1 : -1);
         }
+
         /**
          * Resets the expiration time of the lease.
          */

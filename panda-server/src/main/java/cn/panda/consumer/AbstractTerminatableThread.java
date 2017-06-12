@@ -30,8 +30,7 @@ public abstract class AbstractTerminatableThread extends Thread implements
         Exception ex = null;
         try{
             for(;;){
-                if(terminationToken.isToShutdown()
-                        && terminationToken.reservations.get() <= 0) {
+                if(terminationToken.isToShutdown() && terminationToken.reservations.get() <= 0) {
                     break;
                 }
                 doRun();
