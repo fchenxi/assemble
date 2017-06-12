@@ -8,6 +8,7 @@ import query.HBaseQueryV2;
 import query.ThlRowKeyGenerator;
 
 import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class HBaseQueryTestV2 {
@@ -106,5 +107,58 @@ public class HBaseQueryTestV2 {
         long startTS = System.currentTimeMillis();
         System.out.println(startTS);
         long endTS = 1492594339396L;
+    }
+    @Test
+    public void intToByte() throws NoSuchAlgorithmException {
+        short dmlType = 1;
+        byte[] dml =  {(byte) dmlType};
+        System.out.println(Bytes.toStringBinary(dml));
+
+        byte[] prefix = Bytes.add(Bytes.toBytes(dmlType), Bytes.toBytes(System.currentTimeMillis()));
+        byte[] suffix = Bytes.toBytes("");
+        prefix = Bytes.add(prefix, MessageDigest.getInstance("MD5").digest(suffix), dml);
+
+        suffix = Bytes.add(prefix, MessageDigest.getInstance("MD5").digest(suffix), suffix);
+
+        byte[] rowkey = Bytes.add(prefix, suffix);
+
+        System.out.println(Bytes.toStringBinary(rowkey));
+
+        byte[] int1 = new byte[]{0x00, 0x01};
+        System.out.println(Bytes.toStringBinary(int1));
+
+    }
+
+    @Test
+    public void rowkeyGenTest() throws NoSuchAlgorithmException {
+        long timeStamp = 1451963509;
+        String schemaName = "retail_pos";
+        String tableName = "order_dtl";
+        short dmlType = 2;
+
+        short nodeIndex = 0;
+        long seqNo = 0;
+        short fragNo = 0;
+        short fragSeqNo = 0;
+
+//        String dbObjectName = tableName + StringConstants.ROW_KEY_SEPARATOR + schemaName;
+        String dbObjectName = tableName + StringConstants.ROW_KEY_SEPARATOR + schemaName;
+//        byte[] reverseTS = Bytes.toBytes(Long.MAX_VALUE - timeStamp);
+        byte[] reverseTS = Bytes.toBytes(timeStamp);
+        byte[] keyPrefix = Bytes.add(Bytes.toBytes(dmlType), MessageDigest.getInstance("MD5").digest(Bytes.toBytes(dbObjectName)), reverseTS);
+        byte[] keySuffix = Bytes.add(Bytes.toBytes(nodeIndex), Bytes.toBytes(seqNo), Bytes.toBytes(fragNo));
+        keySuffix = Bytes.add(keySuffix, Bytes.toBytes(fragSeqNo));
+//        byte[] rowkey1 = Bytes.add(keyPrefix, keySuffix);
+        byte[] rowkey1 = Bytes.add(Bytes.toBytes(dmlType), keySuffix);
+
+
+        try {
+            byte[] rowkey2 = cn.panda.hbase.service.ThlRowKeyGenerator.getInstance().generateRowKey(timeStamp,
+                    schemaName, tableName, dmlType, nodeIndex, seqNo, fragNo, fragSeqNo);
+            System.out.println(Bytes.toStringBinary(rowkey1));
+            System.out.println(Bytes.toStringBinary(rowkey2));
+//            System.out.println(Bytes.toStringBinary());
+        } catch (NoSuchAlgorithmException e) {
+        }
     }
 }

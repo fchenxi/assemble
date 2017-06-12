@@ -31,6 +31,7 @@ public class NestedMonitorLockoutExample {
         }, new Date(), 10);
 
     }
+
     private static class Helper {
         private volatile boolean isStateOK = false;
         private final Predicate stateBeOK = new Predicate() {
@@ -40,6 +41,7 @@ public class NestedMonitorLockoutExample {
             }
         };
         private final Blocker blocker = new ConditionVarBlocker();
+
         public String xGuarededMethod(final String message) {
             GuardedAction<String> ga = new GuardedAction<String>(stateBeOK) {
                 @Override
@@ -55,6 +57,7 @@ public class NestedMonitorLockoutExample {
             }
             return result;
         }
+
         public void xStateChanged() {
             try {
                 blocker.signalAfter(new Callable<Boolean>() {

@@ -3,11 +3,11 @@ package cn.panda.hbase.service;
 import cn.panda.common.hbase.distributor.AbstractRowKeyDistributor;
 import cn.panda.common.hbase.distributor.RowKeyDistributorByHashPrefix;
 import cn.panda.common.utils.TimeUtils;
-import org.junit.Before;
-import query.ThlRowKeyGenerator;
 import org.apache.hadoop.hbase.util.Bytes;
+import org.junit.Before;
 import org.junit.Test;
 import query.HBaseQueryV1;
+import query.ThlRowKeyGenerator;
 
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
@@ -23,34 +23,28 @@ public class HBaseQueryTest {
         System.setProperty("hadoop.home.dir", "d:\\winutil\\");
     }
 
+    /**
+     * case 1: when the region split, can we scan it?
+     * @throws UnsupportedEncodingException
+     */
     @Test
     public void testSchemaRangeQuery() throws UnsupportedEncodingException {
 
         HBaseQueryV1 client = new HBaseQueryV1();
-        String HBASE_TABLE = "rowkey_range_test";
-        String schema = "retail_gms::auto_close_account_src";
+//        String HBASE_TABLE = "rowkey_range_test";
+        String schema = "retail_pos";
+        String t = "order_dtl";
         short dmlType = 1;
-//        long startTS = 1598319566;
-//        long endTS = 1207324366;
-        long startTS = 1677324366;
-        long endTS = 1299999999;
-        client.query(HBASE_TABLE, schema, dmlType, startTS, endTS);
+        long startTS = 1067334366;
+        long endTS = 1767604366;
+//        long startTS = 1677324366;
+        short nodeIndex = 0;
+        long seqNo = 0;
+        short fragNo = 0;
+        client.query(schema, t, dmlType, startTS, endTS, nodeIndex, seqNo, fragNo);
 
     }
-    @Test
-    public void testTSRangeQuery() throws UnsupportedEncodingException {
 
-        HBaseQueryV1 client = new HBaseQueryV1();
-        String HBASE_TABLE = "rowkey_range_test";
-        String schema = "retail_gms::auto_close_account_src";
-        short dmlType = 1;
-//        long startTS = 1598319566;
-//        long endTS = 1207324366;
-        long startTS = 1677324366;
-        long endTS = 1299999999;
-        client.query(HBASE_TABLE, schema, dmlType, startTS, endTS);
-
-    }
     @Test
     public void testBatch()
             throws UnsupportedEncodingException {
@@ -61,12 +55,12 @@ public class HBaseQueryTest {
         String table = "authority_user_category_rt";
         short dmlType = 3;
         short nodeIndex = 12;
-        long startTS = 1467324366;
-        long endTS = 1478319566;
+        long ts = 1467324366;
+//        long endTS = 1478319566;
         long seqNo = 90;
         short fragNo = 6;
 //        query.hbaseCrud(HBASE_TABLE, schema, table, dmlType, nodeIndex, startTS, endTS, seqNo);
-        query.batch(HBASE_TABLE, schema, table, dmlType, nodeIndex, startTS, seqNo, fragNo);
+        query.batch(HBASE_TABLE, schema, table, dmlType, nodeIndex, ts, seqNo, fragNo);
 
     }
 
@@ -92,14 +86,15 @@ public class HBaseQueryTest {
         long endTS = 1488319566;
         long seqNo = 90;
         short fragNo = 6;
-        byte[] rowkey = generator.generateRowKey(startTS, schema, table, dmlType, nodeIndex, seqNo, fragNo);
+        byte[] rowkey = generator.generateRowKey(startTS, schema, table, dmlType, nodeIndex,
+                seqNo, fragNo);
 
         System.out.println("rowkey byteString: " + Bytes.toStringBinary(rowkey));
 
         long startT = 1487324366;
         long endT = 1467400000;
         System.out.println("startT: " + String.valueOf(Long.MAX_VALUE - startT));
-        System.out.println("endT: " +  String.valueOf(Long.MAX_VALUE - endT));
+        System.out.println("endT: " + String.valueOf(Long.MAX_VALUE - endT));
 
         Random dmlRandom = new Random();
         for (int i = 0; i < 10; i++) {
@@ -107,6 +102,7 @@ public class HBaseQueryTest {
             System.out.println(i + " : " + k);
         }
     }
+
     @Test
     public void testSalteHash() {
 
@@ -134,18 +130,20 @@ public class HBaseQueryTest {
         byte[][] allBucketRowKey = keyDistributor.getAllDistributedKeys(oriRowKey);
         for (int i = 0; i < 156; i++) {
 //            System.out.println(" i: " + i + Bytes.toStringBinary(allBucketRowKey[i]));
-            System.out.println("i: " + i + ", hashPrefix: " + Bytes.toStringBinary(keyDistributor.getDistributedKey(Bytes.toBytes(i))));
+            System.out.println("i: " + i + ", hashPrefix: " + Bytes.toStringBinary(keyDistributor
+                    .getDistributedKey(Bytes.toBytes(i))));
         }
 
 //        System.out.print("lowerPrefix bianryString: " + Bytes.toStringBinary(lowerPrefix));
 //        System.out.print("upperPrefix bianryString: " + Bytes.toStringBinary(upperPrefix));
-        byte[] lowerPrefix = new byte[] { 0x0 };
-        byte[] upperPrefix = new byte[] { 0x7F };
+        byte[] lowerPrefix = new byte[]{0x0};
+        byte[] upperPrefix = new byte[]{0x7F};
         System.out.println("upperByteString: " + Bytes.toStringBinary(lowerPrefix));
         System.out.println("upperByteString: " + Bytes.toStringBinary(upperPrefix));
     }
+
     @Test
-    public void testReverseTS () {
+    public void testReverseTS() {
         long startTS = 1299999999;
         long endTS = 1677324366;
 
@@ -154,18 +152,18 @@ public class HBaseQueryTest {
 
         Map<Integer, String> map = new HashMap<>();
         for (Map.Entry<Integer, String> entry : map.entrySet()) {
-             //Map.entry<Integer,String> 映射项（键-值对）  有几个方法：用上面的名字entry
-             //entry.getKey() ;entry.getValue(); entry.setValue();
-             //map.entrySet()  返回此映射中包含的映射关系的 Set视图。
-             System.out.println("key= " + entry.getKey() + " and value= "
-                             + entry.getValue());
+            //Map.entry<Integer,String> 映射项（键-值对）  有几个方法：用上面的名字entry
+            //entry.getKey() ;entry.getValue(); entry.setValue();
+            //map.entrySet()  返回此映射中包含的映射关系的 Set视图。
+            System.out.println("key= " + entry.getKey() + " and value= "
+                    + entry.getValue());
         }
 
     }
 
     @Test
     public void testComputeHashByte() {
-        byte[] byteStr = new byte[] { 0x7F };
+        byte[] byteStr = new byte[]{0x7F};
         int originalKey = hashBytes(byteStr);
         long hash = Math.abs(originalKey);
         byte[] prefixByte = {(byte) (hash % 64)};
@@ -174,7 +172,10 @@ public class HBaseQueryTest {
         byte[] prefixByte2 = {(byte) 125};
         System.out.println(Bytes.toStringBinary(prefixByte2));
     }
-    /** Compute hash for binary data. */
+
+    /**
+     * Compute hash for binary data.
+     */
     private static int hashBytes(byte[] bytes) {
         int hash = 1;
         for (int i = 0; i < bytes.length; i++)
