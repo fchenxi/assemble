@@ -1,2 +1,4 @@
 # panda
-The panda-hbase is the hbase client api extracted from pinpoint(https://github.com/naver/pinpoint)
+Extracted core netty code style from 
+a nice code style Distributed Scheduled Job Framework, see it https://github
+.com/ltsopensource/light-task-scheduler.

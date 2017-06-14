@@ -54,8 +54,7 @@ import java.util.regex.Pattern;
  * <p>This class also holds and manages the connection to ZooKeeper.  Code to
  * deal with connection related events and exceptions are handled here.
  */
-@InterfaceAudience.Private
-public class ZooKeeperWatcher implements Watcher, Abortable, Closeable {
+zpublic class ZooKeeperWatcher implements Watcher, Abortable, Closeable {
   private static final Log LOG = LogFactory.getLog(ZooKeeperWatcher.class);
 
   // Identifier for this watcher (for logging only).  It is made of the prefix
