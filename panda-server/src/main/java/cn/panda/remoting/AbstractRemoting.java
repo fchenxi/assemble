@@ -9,7 +9,6 @@ import cn.panda.remoting.exception.RemotingSendRequestException;
 import cn.panda.remoting.exception.RemotingTimeoutException;
 import cn.panda.remoting.exception.RemotingTooMuchRequestException;
 import cn.panda.remoting.protocol.Pair;
-import cn.panda.remoting.protocol.RemotingCommand;
 import cn.panda.remoting.protocol.RemotingCommandHelper;
 import cn.panda.remoting.protocol.RemotingProtos;
 import cn.panda.util.SemaphoreReleaseOnlyOnce;

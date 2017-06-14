@@ -1,6 +1,5 @@
 package cn.panda.remoting;
 
-import cn.panda.remoting.protocol.RemotingCommand;
 import cn.panda.util.SemaphoreReleaseOnlyOnce;
 import cn.panda.util.SystemClock;
 import java.util.concurrent.CountDownLatch;

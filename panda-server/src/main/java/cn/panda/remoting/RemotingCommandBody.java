@@ -1,4 +1,6 @@
-package cn.panda.remoting.protocol;
+package cn.panda.remoting;
+
+import cn.panda.remoting.protocol.RemotingCommandFieldCheckException;
 
 import java.io.Serializable;
 

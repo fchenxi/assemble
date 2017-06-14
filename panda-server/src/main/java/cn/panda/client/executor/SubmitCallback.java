@@ -1,6 +1,6 @@
 package cn.panda.client.executor;
 
-import cn.panda.remoting.protocol.RemotingCommand;
+import cn.panda.remoting.RemotingCommand;
 
 /**
  * @author Robert HG (254963746@qq.com) on 5/30/15.

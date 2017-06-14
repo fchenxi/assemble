@@ -1,9 +1,6 @@
 package cn.panda.util;
 
 
-import com.github.ltsopensource.core.logger.support.FormattingTuple;
-import com.github.ltsopensource.core.logger.support.MessageFormatter;
-
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.regex.Pattern;
@@ -85,10 +82,10 @@ public final class StringUtils {
         return false;
     }
 
-    public static String format(String format, Object... args) {
-        FormattingTuple ft = MessageFormatter.arrayFormat(format, args);
-        return ft.getMessage();
-    }
+//    public static String format(String format, Object... args) {
+//        FormattingTuple ft = MessageFormatter.arrayFormat(format, args);
+//        return ft.getMessage();
+//    }
 
     public static String toString(Throwable e) {
         StringWriter w = new StringWriter();

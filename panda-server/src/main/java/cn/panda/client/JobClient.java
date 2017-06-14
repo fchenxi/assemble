@@ -5,7 +5,6 @@ import cn.panda.client.domain.Response;
 import cn.panda.client.domain.ResponseCode;
 import cn.panda.client.exception.JobSubmitException;
 import cn.panda.client.exception.JobTrackerNotFoundException;
-import cn.panda.client.executor.JobCompletedHandler;
 import cn.panda.client.executor.JobSubmitExecutor;
 import cn.panda.client.executor.SubmitCallback;
 import cn.panda.client.processor.RemotingDispatcher;
@@ -15,7 +14,7 @@ import cn.panda.remoting.RemotingClientDelegate;
 import cn.panda.remoting.RemotingProcessor;
 import cn.panda.remoting.ResponseFuture;
 import cn.panda.remoting.protocol.JobProtos;
-import cn.panda.remoting.protocol.RemotingCommand;
+import cn.panda.remoting.RemotingCommand;
 import cn.panda.remoting.protocol.command.CommandBodyWrapper;
 import cn.panda.remoting.protocol.command.JobSubmitRequest;
 import cn.panda.remoting.protocol.command.JobSubmitResponse;
@@ -23,6 +22,7 @@ import cn.panda.util.BatchUtils;
 import cn.panda.util.StringUtils;
 import org.apache.commons.collections.CollectionUtils;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
@@ -32,7 +32,7 @@ import static cn.panda.remoting.netty.NettyRemotingServer.LOGGER;
 
 public class JobClient {
 
-    private JobSubmitProtector protector;
+    private JobSubmitProtector protector = new JobSubmitProtector();
 
     protected RemotingClientDelegate remotingClient;
 
@@ -40,6 +40,10 @@ public class JobClient {
 
     private static final int BATCH_SIZE = 10;
 
+    public Response submitJob(Job job) throws JobSubmitException {
+//        checkStart();
+        return protectSubmit(Collections.singletonList(job));
+    }
 
     private Response protectSubmit(List<Job> jobs) throws JobSubmitException {
         return protector.execute(jobs, new JobSubmitExecutor<Response>() {
@@ -56,7 +60,8 @@ public class JobClient {
 
         final Response response = new Response();
         try {
-//            JobSubmitRequest jobSubmitRequest = CommandBodyWrapper.wrapper(new JobSubmitRequest());
+//            JobSubmitRequest jobSubmitRequest = CommandBodyWrapper.wrapper(new JobSubmitRequest
+// ());
             JobSubmitRequest jobSubmitRequest = CommandBodyWrapper.wrapper(new JobSubmitRequest());
 
             jobSubmitRequest.setJobs(jobs);
@@ -192,6 +197,7 @@ public class JobClient {
             throw new JobSubmitException("JobClient did not started");
         }
     }
+
     private void checkFields(List<Job> jobs) {
         // 参数验证
         if (CollectionUtils.isEmpty(jobs)) {

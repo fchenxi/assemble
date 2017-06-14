@@ -7,6 +7,14 @@ public class Job {
 
     private String taskId;
 
+    public String getTaskId() {
+        return taskId;
+    }
+
+    public void setTaskId(String taskId) {
+        this.taskId = taskId;
+    }
+
     public void checkField() throws JobSubmitException {
         if (StringUtils.isEmpty(taskId)) {
             throw new JobSubmitException("taskId can not be empty! job is " + toString());

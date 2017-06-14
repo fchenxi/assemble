@@ -5,7 +5,7 @@ import cn.panda.remoting.Channel;
 import cn.panda.remoting.RemotingProcessor;
 import cn.panda.remoting.exception.RemotingCommandException;
 import cn.panda.remoting.protocol.JobProtos;
-import cn.panda.remoting.protocol.RemotingCommand;
+import cn.panda.remoting.RemotingCommand;
 import cn.panda.remoting.protocol.command.JobFinishedRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

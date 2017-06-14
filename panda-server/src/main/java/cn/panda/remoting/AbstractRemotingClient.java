@@ -4,7 +4,6 @@ package cn.panda.remoting;
 import cn.panda.constants.RemotingClientConfig;
 import cn.panda.remoting.exception.*;
 import cn.panda.remoting.protocol.Pair;
-import cn.panda.remoting.protocol.RemotingCommand;
 import cn.panda.util.NamedThreadFactory;
 import cn.panda.util.remoting.RemotingHelper;
 import org.slf4j.Logger;

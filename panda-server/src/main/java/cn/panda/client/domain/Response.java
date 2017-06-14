@@ -65,8 +65,19 @@ public class Response implements Serializable {
         this.code = code;
     }
 
+//    @Override
+//    public String toString() {
+//        return failedJobs.toString();
+//    }
+
+
     @Override
     public String toString() {
-        return failedJobs.toString();
+        return "Response{" +
+                "success=" + success +
+                ", msg='" + msg + '\'' +
+                ", code='" + code + '\'' +
+                ", failedJobs=" + failedJobs +
+                '}';
     }
 }

@@ -4,7 +4,6 @@ import cn.panda.remoting.exception.RemotingException;
 import cn.panda.remoting.exception.RemotingSendRequestException;
 import cn.panda.remoting.exception.RemotingTimeoutException;
 import cn.panda.remoting.exception.RemotingTooMuchRequestException;
-import cn.panda.remoting.protocol.RemotingCommand;
 
 import java.util.concurrent.ExecutorService;
 

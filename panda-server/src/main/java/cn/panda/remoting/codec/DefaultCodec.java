@@ -1,6 +1,6 @@
 package cn.panda.remoting.codec;
-import cn.panda.remoting.protocol.RemotingCommand;
-import cn.panda.remoting.protocol.RemotingCommandBody;
+import cn.panda.remoting.RemotingCommand;
+import cn.panda.remoting.RemotingCommandBody;
 import cn.panda.remoting.serialize.RemotingSerializable;
 
 import java.nio.ByteBuffer;

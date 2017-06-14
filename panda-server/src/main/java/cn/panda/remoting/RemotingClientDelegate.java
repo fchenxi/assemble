@@ -2,12 +2,9 @@ package cn.panda.remoting;
 
 import cn.panda.client.exception.JobTrackerNotFoundException;
 import cn.panda.remoting.exception.RemotingException;
-import cn.panda.remoting.protocol.RemotingCommand;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.ExecutorService;
 
 /**

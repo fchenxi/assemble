@@ -1,5 +1,7 @@
 package cn.panda.remoting.protocol;
 
+import cn.panda.remoting.RemotingCommand;
+
 /**
  * @author Robert HG (254963746@qq.com) on 11/6/15.
  */

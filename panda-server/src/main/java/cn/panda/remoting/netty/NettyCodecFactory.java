@@ -3,7 +3,7 @@ package cn.panda.remoting.netty;
 import cn.panda.constants.Constants;
 import cn.panda.remoting.Channel;
 import cn.panda.remoting.codec.Codec;
-import cn.panda.remoting.protocol.RemotingCommand;
+import cn.panda.remoting.RemotingCommand;
 import cn.panda.util.remoting.RemotingHelper;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandler;

@@ -1,7 +1,6 @@
 package cn.panda.remoting;
 
 import cn.panda.remoting.exception.*;
-import cn.panda.remoting.protocol.RemotingCommand;
 
 import java.util.concurrent.ExecutorService;
 

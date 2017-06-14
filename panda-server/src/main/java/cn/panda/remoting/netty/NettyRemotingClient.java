@@ -6,7 +6,7 @@ import cn.panda.remoting.ChannelEventListener;
 import cn.panda.remoting.RemotingEvent;
 import cn.panda.remoting.RemotingEventType;
 import cn.panda.remoting.exception.RemotingException;
-import cn.panda.remoting.protocol.RemotingCommand;
+import cn.panda.remoting.RemotingCommand;
 import cn.panda.util.NamedThreadFactory;
 import cn.panda.util.remoting.RemotingHelper;
 import io.netty.bootstrap.Bootstrap;
