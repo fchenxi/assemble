@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<configuration>
+
+    <property>
+        <name>hbase.coprocessor.region.classes</name>
+        <value>
+            org.apache.hadoop.hbase.security.token.TokenProvider,org.apache.hadoop.hbase.security.access.AccessController
+        </value>
+    </property>
+    <property>
+        <name>hbase.coprocessor.master.classes</name>
+        <value>org.apache.hadoop.hbase.security.access.AccessController</value>
+    </property>
+    <property>
+        <name>hbase.rpc.engine</name>
+        <value>org.apache.hadoop.hbase.ipc.SecureRpcEngine</value>
+    </property>
+    <property>
+        <name>hbase.rpc.protection</name>
+        <value>privacy</value>
+    </property>
+
+    <property>
+        <name>hbase.zookeeper.property.clientPort</name>
+        <value>2181</value>
+    </property>
+
+    <property>
+        <name>hbase.zookeeper.quorum</name>
+        <value>DC-log-001,DC-log-002,DC-log-003</value>
+    </property>
+
+    <property>
+        <name>zookeeper.znode.parent</name>
+        <value>/dev_hbase</value>
+    </property>
+
+</configuration>
