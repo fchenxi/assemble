@@ -33,7 +33,6 @@
     <mvc:annotation-driven/>
     <!--<tx:annotation-driven />-->
 
-    <import resource="classpath:applicationContext-hbase.xml"/>
     <bean id="jsonObjectMapper" class="org.springframework.http.converter.json.Jackson2ObjectMapperFactoryBean">
     </bean>
     <mvc:annotation-driven>
